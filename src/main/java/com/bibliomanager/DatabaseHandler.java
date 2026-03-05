@@ -4,7 +4,9 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 
 public class DatabaseHandler {
+
     public static Connection connectDB() {
+
         String url = "jdbc:sqlite:database.db";
         Connection conn = null;
 

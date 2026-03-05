@@ -1,26 +1,33 @@
 package com.bibliomanager;
 
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
+import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
+
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.Statement;
 
 public class Controller {
     @FXML
     private Button minimize;
     @FXML
     private Button loginBtn;
-
     @FXML
     private AnchorPane root;
-
     @FXML
     private TextField studentPassword;
-
     @FXML
-    private TextField studentUsername;
+    private TextField studentNumber;
 
     @FXML
     public void exit () {
@@ -31,4 +38,74 @@ public class Controller {
         Stage stage = (Stage) minimize.getScene().getWindow();
         stage.setIconified(true);
     };
+
+    //NUMBERS ONLY ALLOWED
+    public void numbersOnly (KeyEvent event) {
+        String currentText = studentNumber.getText() + event.getCharacter();
+        if (!currentText.matches("\\d*")) {
+            event.consume();
+            studentNumber.setStyle("-fx-border-color: #e04040");
+        }
+        else {
+            studentNumber.setStyle("-fx-border-color: #fff");
+        }
+    }
+
+    //Database tools
+    private Connection connection;
+    private PreparedStatement pstmt;
+    private Statement stmt;
+    private ResultSet resultSet;
+
+    public void login () {
+
+        String sql = "SELECT * FROM students WHERE studentNumber = ? AND password = ?";
+        connection = DatabaseHandler.connectDB();
+
+        try {
+            pstmt = connection.prepareStatement(sql);
+            pstmt.setString(1, studentNumber.getText());
+            pstmt.setString(2, studentPassword.getText());
+            resultSet = pstmt.executeQuery();
+
+            Alert alert;
+
+            if (studentNumber.getText().isBlank() || studentPassword.getText().isBlank()) {
+                alert = new Alert(Alert.AlertType.ERROR);
+                alert.setTitle("Admin Message");
+                alert.setHeaderText(null);
+                alert.setContentText("Please, fill all blank fields.");
+                alert.showAndWait();
+            }
+            else {
+                if (resultSet.next()) {
+
+                    alert = new Alert(Alert.AlertType.INFORMATION);
+                    alert.setTitle("Admin Message");
+                    alert.setHeaderText(null);
+                    alert.setContentText("Successfully login !");
+                    alert.showAndWait();
+
+                    //TO HIDE THE LOGIN FORM
+                    loginBtn.getScene().getWindow().hide();
+
+                    //FOR DASHBOARD
+                    Parent root = FXMLLoader.load(getClass().getResource("/com/bibliomanager/fxml/dashboard-view.fxml"));
+                    Stage stage = new Stage();
+                    Scene scene = new Scene(root);
+                    stage.setScene(scene);
+                    stage.show();
+                }
+                else {
+                    alert = new Alert(Alert.AlertType.ERROR);
+                    alert.setTitle("Admin Message");
+                    alert.setHeaderText(null);
+                    alert.setContentText("Wrong username or password");
+                    alert.showAndWait();
+                }
+            }
+        } catch (Exception e) {
+            System.err.println(e.getMessage());
+        }
+    }
 }
