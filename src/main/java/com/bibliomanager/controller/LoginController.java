@@ -41,8 +41,18 @@ public class LoginController {
 
     //NUMBERS ONLY ALLOWED
     public void numbersOnly (KeyEvent event) {
-        String currentText = studentNumber.getText() + event.getCharacter();
-        if (!currentText.matches("\\d*")) {
+        String character = event.getCharacter();
+
+        if (character == null || character.isEmpty()) {
+            return;
+        }
+
+        // Allow control keys such as Enter/Backspace so default actions still work.
+        if (Character.isISOControl(character.charAt(0))) {
+            return;
+        }
+
+        if (!character.matches("\\d")) {
             event.consume();
             studentNumber.setStyle("-fx-border-color: #e04040");
         }

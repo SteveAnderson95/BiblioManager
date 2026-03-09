@@ -18,14 +18,14 @@
                   <Font name="System Bold" size="24.0" />
                </font>
             </Label>
-            <TextField fx:id="studentNumber" layoutX="156.0" layoutY="152.0" onKeyTyped="#numbersOnly" prefHeight="26.0" prefWidth="217.0" promptText="Student ID" styleClass="textfield" />
-            <Button fx:id="loginBtn" layoutX="225.0" layoutY="258.0" mnemonicParsing="false" onAction="#login" prefHeight="26.0" prefWidth="79.0" styleClass="login-btn" text="Login" />
+            <TextField fx:id="studentNumber" layoutX="156.0" layoutY="152.0" onAction="#login" onKeyTyped="#numbersOnly" prefHeight="26.0" prefWidth="217.0" promptText="Student ID" styleClass="textfield" />
+            <Button fx:id="loginBtn" defaultButton="true" layoutX="225.0" layoutY="258.0" mnemonicParsing="false" onAction="#login" prefHeight="26.0" prefWidth="79.0" styleClass="login-btn" text="Login" />
             <ImageView fitHeight="45.0" fitWidth="54.0" layoutX="242.0" layoutY="14.0" pickOnBounds="true" preserveRatio="true">
                <image>
                   <Image url="@../images/user_icon.png" />
                </image>
             </ImageView>
-            <PasswordField fx:id="studentPassword" layoutX="156.0" layoutY="197.0" prefHeight="26.0" prefWidth="217.0" promptText="Password" styleClass="textfield" />
+            <PasswordField fx:id="studentPassword" layoutX="156.0" layoutY="197.0" onAction="#login" prefHeight="26.0" prefWidth="217.0" promptText="Password" styleClass="textfield" />
          </children>
       </AnchorPane>
       <Button fx:id="close" layoutX="646.0" layoutY="8.0" mnemonicParsing="false" onAction="#exit" prefHeight="18.0" prefWidth="21.0" styleClass="close">
