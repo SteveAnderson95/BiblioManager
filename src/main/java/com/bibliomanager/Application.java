@@ -25,8 +25,8 @@ public class Application extends javafx.application.Application {
             y = e.getSceneY();
         });
         root.setOnMouseDragged((MouseEvent e) -> {
-            stage.setX(e.getSceneX() - x);
-            stage.setY(e.getSceneY() - y);
+            stage.setX(e.getScreenX() - x);
+            stage.setY(e.getScreenY() - y);
         });
 
         Scene scene = new Scene(root);
