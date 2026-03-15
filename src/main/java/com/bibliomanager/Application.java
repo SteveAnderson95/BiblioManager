@@ -16,9 +16,7 @@ public class Application extends javafx.application.Application {
 
     @Override
     public void start(Stage stage) throws IOException {
-        FXMLLoader fxmlLoader = new FXMLLoader(Application.class.getResource("/com/bibliomanager/fxml/login-view.fxml"));
-        Parent root = FXMLLoader.load(getClass().getResource("/com/bibliomanager/fxml/dashboard-view.fxml"));
-//                fxmlLoader.load();
+        Parent root = FXMLLoader.load(getClass().getResource("/com/bibliomanager/fxml/login-view.fxml"));
 
         root.setOnMousePressed((MouseEvent e) -> {
             x = e.getSceneX();
