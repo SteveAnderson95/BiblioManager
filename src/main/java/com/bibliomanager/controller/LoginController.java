@@ -9,8 +9,10 @@ import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
 import javafx.scene.input.KeyEvent;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
+import javafx.stage.StageStyle;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -38,6 +40,9 @@ public class LoginController {
         Stage stage = (Stage) minimize.getScene().getWindow();
         stage.setIconified(true);
     };
+
+    private double x = 0;
+    private double y = 0;
 
     //NUMBERS ONLY ALLOWED
     public void numbersOnly (KeyEvent event) {
@@ -102,8 +107,21 @@ public class LoginController {
                     //FOR DASHBOARD
                     Parent root = FXMLLoader.load(getClass().getResource("/com/bibliomanager/fxml/dashboard-view.fxml"));
                     Stage stage = new Stage();
-                    Scene scene = new Scene(root);
+
+                    root.setOnMousePressed((MouseEvent e) -> {
+                        x = e.getSceneX();
+                        y = e.getSceneY();
+                    });
+                    root.setOnMouseDragged((MouseEvent e) -> {
+                        stage.setX(e.getScreenX() - x);
+                        stage.setY(e.getScreenY() - y);
+                    });
+
+                    Scene scene = new Scene(root, 986, 600);
                     stage.setScene(scene);
+                    stage.initStyle(StageStyle.TRANSPARENT);
+                    stage.setMinHeight(649);
+                    stage.setMinWidth(986);
                     stage.show();
                 }
                 else {
