@@ -22,7 +22,7 @@
             <Button fx:id="loginBtn" layoutX="225.0" layoutY="258.0" mnemonicParsing="false" onAction="#login" prefHeight="26.0" prefWidth="79.0" styleClass="login-btn" text="Login" />
             <ImageView fitHeight="45.0" fitWidth="54.0" layoutX="242.0" layoutY="14.0" pickOnBounds="true" preserveRatio="true">
                <image>
-                  <Image url="@../images/user_icon.png" />
+                  <Image url="@../images/icons/user_icon.png" />
                </image>
             </ImageView>
             <PasswordField fx:id="studentPassword" layoutX="156.0" layoutY="197.0" onAction="#login" prefHeight="26.0" prefWidth="217.0" promptText="Password" styleClass="textfield" />
@@ -32,7 +32,7 @@
          <graphic>
             <ImageView fitHeight="19.0" fitWidth="18.0" pickOnBounds="true" preserveRatio="true">
                <image>
-                  <Image url="@../images/close.png" />
+                  <Image url="@../images/icons/close.png" />
                </image>
             </ImageView>
          </graphic>
@@ -41,7 +41,7 @@
          <graphic>
             <ImageView fitHeight="16.0" fitWidth="16.0" pickOnBounds="true" preserveRatio="true">
                <image>
-                  <Image url="@../images/minus.png" />
+                  <Image url="@../images/icons/minus.png" />
                </image>
             </ImageView>
          </graphic>
