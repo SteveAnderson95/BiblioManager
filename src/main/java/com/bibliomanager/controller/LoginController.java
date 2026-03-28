@@ -1,6 +1,7 @@
 package com.bibliomanager.controller;
 
 import com.bibliomanager.DatabaseHandler;
+import com.bibliomanager.dao.GetData;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -94,6 +95,8 @@ public class LoginController {
             }
             else {
                 if (resultSet.next()) {
+
+                    GetData.studentNumber = studentNumber.getText();
 
                     alert = new Alert(Alert.AlertType.INFORMATION);
                     alert.setTitle("Admin Message");

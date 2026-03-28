@@ -126,7 +126,7 @@
                               <Font size="14.0" />
                            </font>
                         </Label>
-                        <Label fx:id="studentNumberLabel" alignment="CENTER" layoutX="76.0" layoutY="156.0" prefHeight="29.0" prefWidth="123.0" text="Steve Anderson" textFill="WHITE">
+                        <Label fx:id="studentNumberLabel" alignment="CENTER" layoutX="76.0" layoutY="156.0" prefHeight="29.0" prefWidth="123.0" textFill="WHITE">
                            <font>
                               <Font name="System Bold" size="14.0" />
                            </font>
@@ -169,7 +169,7 @@
                            <children>
                               <AnchorPane layoutX="272.0" layoutY="13.0" prefHeight="473.0" prefWidth="505.0" styleClass="card-form">
                                  <children>
-                                    <TableView fx:id="availableBooksTable" layoutX="14.0" layoutY="15.0" prefHeight="443.0" prefWidth="478.0">
+                                    <TableView fx:id="availableBooksTable" layoutX="14.0" layoutY="15.0" onMouseClicked="#selectAvailableBooks" prefHeight="443.0" prefWidth="478.0">
                                       <columns>
                                         <TableColumn fx:id="abtBookTitleCol" prefWidth="126.0" text="Book Title" />
                                         <TableColumn fx:id="abtBookAuthorCol" prefWidth="107.0" text="Author" />
@@ -181,19 +181,19 @@
                               </AnchorPane>
                               <AnchorPane layoutX="14.0" layoutY="14.0" prefHeight="472.0" prefWidth="242.0" styleClass="card-form">
                                  <children>
-                                    <AnchorPane layoutX="41.0" layoutY="21.0" prefHeight="158.0" prefWidth="128.0" styleClass="image-card">
+                                    <AnchorPane layoutX="54.0" layoutY="21.0" prefHeight="158.0" prefWidth="128.0" styleClass="image-card">
                                        <children>
-                                          <ImageView fx:id="availableBookPoster" fitHeight="154.0" fitWidth="160.0" layoutY="2.0" pickOnBounds="true" preserveRatio="true" />
+                                          <ImageView fx:id="availableBookPoster" fitHeight="171.0" fitWidth="134.0" layoutY="2.0" pickOnBounds="true" preserveRatio="true" />
                                        </children>
                                     </AnchorPane>
-                                    <Button fx:id="saveBtn" layoutX="14.0" layoutY="268.0" mnemonicParsing="false" prefHeight="29.0" prefWidth="64.0" styleClass="save-btn" text="Save" />
-                                    <Label fx:id="availableBookTitle" alignment="CENTER" layoutX="15.0" layoutY="193.0" prefHeight="22.0" prefWidth="215.0" text="Programming Language">
+                                    <Button fx:id="saveBtn" layoutX="9.0" layoutY="299.0" mnemonicParsing="false" prefHeight="29.0" prefWidth="64.0" styleClass="save-btn" text="Save" />
+                                    <Label fx:id="availableBookTitle" alignment="CENTER" layoutX="14.0" layoutY="225.0" prefHeight="22.0" prefWidth="215.0">
                                        <font>
                                           <Font size="16.0" />
                                        </font>
                                     </Label>
-                                    <Button fx:id="takeBtn" layoutX="158.0" layoutY="268.0" mnemonicParsing="false" prefHeight="29.0" prefWidth="64.0" styleClass="take-btn" text="Take" />
-                                    <Label layoutX="108.0" layoutY="227.0" text="Title" />
+                                    <Button fx:id="takeBtn" layoutX="158.0" layoutY="299.0" mnemonicParsing="false" prefHeight="29.0" prefWidth="64.0" styleClass="take-btn" text="Take" />
+                                    <Label layoutX="108.0" layoutY="264.0" text="Title" />
                                  </children>
                               </AnchorPane>
                               <Separator layoutX="263.0" layoutY="12.0" orientation="VERTICAL" prefHeight="468.0" prefWidth="6.0" />

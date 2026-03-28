@@ -1,6 +1,7 @@
 package com.bibliomanager.controller;
 
 import com.bibliomanager.DatabaseHandler;
+import com.bibliomanager.dao.GetData;
 import com.bibliomanager.dao.availableBook;
 import javafx.animation.TranslateTransition;
 import javafx.collections.FXCollections;
@@ -16,6 +17,7 @@ import javafx.scene.control.Label;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
@@ -91,6 +93,7 @@ public class DashboardController implements Initializable {
     @FXML
     private Circle smallCircle_image;
 
+    private Image image;
     private Connection connect;
     private PreparedStatement prepare;
     private Statement statement;
@@ -123,6 +126,25 @@ public class DashboardController implements Initializable {
             e.printStackTrace();
         }
         return booksList;
+    }
+
+    public void selectAvailableBooks () {
+
+        availableBook bookData = availableBooksTable.getSelectionModel().getSelectedItem();
+        int num = availableBooksTable.getSelectionModel().getFocusedIndex();
+
+        if ((num - 1) < -1)
+            return;
+
+        availableBookTitle.setText(bookData.getTitle());
+
+        String uri = "file:" + bookData.getImage();
+        image = new Image(uri, 134, 171, false, true);
+        availableBookPoster.setImage(image);
+    }
+
+    public void setStudentNumberLabel () {
+        studentNumberLabel.setText(GetData.studentNumber);
     }
 
     private ObservableList<availableBook> booksList;
@@ -234,5 +256,6 @@ public class DashboardController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         showAvailableBooks();
+        setStudentNumberLabel();
     }
 }
