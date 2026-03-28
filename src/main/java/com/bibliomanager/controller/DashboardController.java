@@ -47,7 +47,7 @@ public class DashboardController implements Initializable {
     @FXML
     private Button availableBooksBtn;
     @FXML
-    private AnchorPane availableBooksFont;
+    private AnchorPane availableBooksForm;
     @FXML
     private TableView<availableBook> availableBooksTable;
     @FXML
@@ -89,9 +89,19 @@ public class DashboardController implements Initializable {
     @FXML
     private Button halfNav_saveBtn;
     @FXML
-    private Button halfNav_takeBtn;
+    private Button halfNav_issueBtn;
     @FXML
     private Circle smallCircle_image;
+    @FXML
+    private AnchorPane availableBookForm;
+    @FXML
+    private AnchorPane issueForm;
+    @FXML
+    private AnchorPane savedBookForm;
+    @FXML
+    private AnchorPane returnBookForm;
+    @FXML
+    private Label currentFormLabel;
 
     private Image image;
     private Connection connect;
@@ -141,6 +151,98 @@ public class DashboardController implements Initializable {
         String uri = "file:" + bookData.getImage();
         image = new Image(uri, 134, 171, false, true);
         availableBookPoster.setImage(image);
+    }
+
+    public void takeAvailableBook (ActionEvent e) {
+
+        if (e.getSource() == takeBtn) {
+            issueForm.setVisible(true);
+            availableBooksForm.setVisible(false);
+            savedBookForm.setVisible(false);
+            returnBookForm.setVisible(false);
+        }
+    }
+
+    public void navButtonDesign (ActionEvent e) {
+
+        if (e.getSource() == availableBooksBtn || e.getSource() == halfNav_availableBtn) {
+
+            issueForm.setVisible(false);
+            availableBooksForm.setVisible(true);
+            savedBookForm.setVisible(false);
+            returnBookForm.setVisible(false);
+
+            currentFormLabel.setText("Available Books");
+
+            availableBooksBtn.setStyle("-fx-background-color: linear-gradient(to bottom right, #46589a, #4278a7);");
+            issueBooksBtn.setStyle("-fx-background-color: linear-gradient(to bottom right, #344275, #3a6389);");
+            returnBooksBtn.setStyle("-fx-background-color: linear-gradient(to bottom right, #344275, #3a6389);");
+            savedBooksBtn.setStyle("-fx-background-color: linear-gradient(to bottom right, #344275, #3a6389);");
+
+            halfNav_availableBtn.setStyle("-fx-background-color: linear-gradient(to bottom right, #46589a, #4278a7);");
+            halfNav_issueBtn.setStyle("-fx-background-color: linear-gradient(to bottom right, #344275, #3a6389);");
+            halfNav_returnBtn.setStyle("-fx-background-color: linear-gradient(to bottom right, #344275, #3a6389);");
+            halfNav_saveBtn.setStyle("-fx-background-color: linear-gradient(to bottom right, #344275, #3a6389);");
+
+        } else if (e.getSource() == issueBooksBtn || e.getSource() == halfNav_issueBtn) {
+
+            issueForm.setVisible(true);
+            availableBooksForm.setVisible(false);
+            savedBookForm.setVisible(false);
+            returnBookForm.setVisible(false);
+
+            currentFormLabel.setText("Issue Books");
+
+            issueBooksBtn.setStyle("-fx-background-color: linear-gradient(to bottom right, #46589a, #4278a7);");
+            availableBooksBtn.setStyle("-fx-background-color: linear-gradient(to bottom right, #344275, #3a6389);");
+            returnBooksBtn.setStyle("-fx-background-color: linear-gradient(to bottom right, #344275, #3a6389);");
+            savedBooksBtn.setStyle("-fx-background-color: linear-gradient(to bottom right, #344275, #3a6389);");
+
+            halfNav_issueBtn.setStyle("-fx-background-color: linear-gradient(to bottom right, #46589a, #4278a7);");
+            halfNav_availableBtn.setStyle("-fx-background-color: linear-gradient(to bottom right, #344275, #3a6389);");
+            halfNav_returnBtn.setStyle("-fx-background-color: linear-gradient(to bottom right, #344275, #3a6389);");
+            halfNav_saveBtn.setStyle("-fx-background-color: linear-gradient(to bottom right, #344275, #3a6389);");
+
+        } else if (e.getSource() == returnBooksBtn || e.getSource() == halfNav_returnBtn) {
+
+            issueForm.setVisible(false);
+            availableBooksForm.setVisible(false);
+            savedBookForm.setVisible(false);
+            returnBookForm.setVisible(true);
+
+            currentFormLabel.setText("Return Books");
+
+            returnBooksBtn.setStyle("-fx-background-color: linear-gradient(to bottom right, #46589a, #4278a7);");
+            issueBooksBtn.setStyle("-fx-background-color: linear-gradient(to bottom right, #344275, #3a6389);");
+            availableBooksBtn.setStyle("-fx-background-color: linear-gradient(to bottom right, #344275, #3a6389);");
+            savedBooksBtn.setStyle("-fx-background-color: linear-gradient(to bottom right, #344275, #3a6389);");
+
+            halfNav_returnBtn.setStyle("-fx-background-color: linear-gradient(to bottom right, #46589a, #4278a7);");
+            halfNav_issueBtn.setStyle("-fx-background-color: linear-gradient(to bottom right, #344275, #3a6389);");
+            halfNav_availableBtn.setStyle("-fx-background-color: linear-gradient(to bottom right, #344275, #3a6389);");
+            halfNav_saveBtn.setStyle("-fx-background-color: linear-gradient(to bottom right, #344275, #3a6389);");
+
+
+        } else if (e.getSource() == savedBooksBtn || e.getSource() == halfNav_saveBtn) {
+
+            issueForm.setVisible(false);
+            availableBooksForm.setVisible(false);
+            savedBookForm.setVisible(true);
+            returnBookForm.setVisible(false);
+
+            currentFormLabel.setText("Saved Books");
+
+            savedBooksBtn.setStyle("-fx-background-color: linear-gradient(to bottom right, #46589a, #4278a7);");
+            issueBooksBtn.setStyle("-fx-background-color: linear-gradient(to bottom right, #344275, #3a6389);");
+            returnBooksBtn.setStyle("-fx-background-color: linear-gradient(to bottom right, #344275, #3a6389);");
+            availableBooksBtn.setStyle("-fx-background-color: linear-gradient(to bottom right, #344275, #3a6389);");
+
+            halfNav_saveBtn.setStyle("-fx-background-color: linear-gradient(to bottom right, #46589a, #4278a7);");
+            halfNav_issueBtn.setStyle("-fx-background-color: linear-gradient(to bottom right, #344275, #3a6389);");
+            halfNav_returnBtn.setStyle("-fx-background-color: linear-gradient(to bottom right, #344275, #3a6389);");
+            halfNav_availableBtn.setStyle("-fx-background-color: linear-gradient(to bottom right, #344275, #3a6389);");
+
+        }
     }
 
     public void setStudentNumberLabel () {

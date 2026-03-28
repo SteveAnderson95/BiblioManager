@@ -40,7 +40,7 @@ public class LoginController {
     private void minimize () {
         Stage stage = (Stage) minimize.getScene().getWindow();
         stage.setIconified(true);
-    };
+    }
 
     private double x = 0;
     private double y = 0;

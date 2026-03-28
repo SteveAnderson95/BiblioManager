@@ -66,6 +66,17 @@
                         </ImageView>
                      </graphic>
                   </Button>
+                  <Label fx:id="currentFormLabel" layoutX="780.0" layoutY="55.0" text="Available Books">
+                     <font>
+                        <Font name="System Bold" size="22.0" />
+                     </font>
+                  </Label>
+                  <Label layoutX="458.0" layoutY="57.0" prefHeight="29.0" prefWidth="138.0" text="Student Portal">
+                     <font>
+                        <Font size="20.0" />
+                     </font>
+                  </Label>
+                  <Line endX="4.0" endY="14.0" layoutX="412.0" layoutY="71.0" startX="4.0" startY="-14.0" />
                </children>
             </AnchorPane>
          </top>
@@ -76,7 +87,7 @@
                      <children>
                         <Circle fx:id="smallCircle_image" fill="#515457" layoutX="36.0" layoutY="43.0" radius="29.0" stroke="BLACK" strokeType="INSIDE" />
                         <Line endX="100.0" layoutX="-39.0" layoutY="95.0" startX="49.5" stroke="WHITE" />
-                        <Button fx:id="halfNav_availableBtn" alignment="CENTER" layoutX="5.0" layoutY="122.0" mnemonicParsing="false" prefHeight="63.0" prefWidth="49.0" styleClass="nav-btn">
+                        <Button fx:id="halfNav_availableBtn" alignment="CENTER" layoutX="5.0" layoutY="122.0" mnemonicParsing="false" onAction="#navButtonDesign" prefHeight="63.0" prefWidth="49.0" styleClass="nav-btn">
                            <graphic>
                               <ImageView fitHeight="48.0" fitWidth="43.0" pickOnBounds="true" preserveRatio="false">
                                  <image>
@@ -84,7 +95,7 @@
                                  </image></ImageView>
                            </graphic>
                         </Button>
-                        <Button fx:id="halfNav_takeBtn" alignment="CENTER" layoutX="4.0" layoutY="192.0" mnemonicParsing="false" prefHeight="63.0" prefWidth="49.0" styleClass="nav-btn">
+                        <Button fx:id="halfNav_issueBtn" alignment="CENTER" layoutX="4.0" layoutY="192.0" mnemonicParsing="false" onAction="#navButtonDesign" prefHeight="63.0" prefWidth="49.0" styleClass="nav-btn">
                            <graphic>
                               <ImageView fitHeight="48.0" fitWidth="43.0" pickOnBounds="true" preserveRatio="false">
                                  <image>
@@ -93,7 +104,7 @@
                               </ImageView>
                            </graphic>
                         </Button>
-                        <Button fx:id="halfNav_returnBtn" alignment="CENTER" layoutX="5.0" layoutY="262.0" mnemonicParsing="false" prefHeight="63.0" prefWidth="49.0" styleClass="nav-btn">
+                        <Button fx:id="halfNav_returnBtn" alignment="CENTER" layoutX="5.0" layoutY="262.0" mnemonicParsing="false" onAction="#navButtonDesign" prefHeight="63.0" prefWidth="49.0" styleClass="nav-btn">
                            <graphic>
                               <ImageView fitHeight="48.0" fitWidth="43.0" pickOnBounds="true" preserveRatio="false">
                                  <image>
@@ -102,7 +113,7 @@
                               </ImageView>
                            </graphic>
                         </Button>
-                        <Button fx:id="halfNav_saveBtn" alignment="CENTER" layoutX="4.0" layoutY="332.0" mnemonicParsing="false" prefHeight="63.0" prefWidth="49.0" styleClass="nav-btn">
+                        <Button fx:id="halfNav_saveBtn" alignment="CENTER" layoutX="4.0" layoutY="332.0" mnemonicParsing="false" onAction="#navButtonDesign" prefHeight="63.0" prefWidth="49.0" styleClass="nav-btn">
                            <graphic>
                               <ImageView fitHeight="44.0" fitWidth="41.0" pickOnBounds="true" preserveRatio="false">
                                  <image>
@@ -113,7 +124,7 @@
                         </Button>
                      </children>
                   </AnchorPane>
-                  <AnchorPane fx:id="navForm" prefHeight="510.0" prefWidth="200.0" styleClass="nav-form" stylesheets="@../css/dashboard.css" AnchorPane.leftAnchor="0.0">
+                  <AnchorPane fx:id="navForm" prefHeight="498.0" prefWidth="200.0" styleClass="nav-form" stylesheets="@../css/dashboard.css" AnchorPane.leftAnchor="0.0">
                      <children>
                         <Circle fx:id="circleImage" fill="#3b4651" layoutX="100.0" layoutY="63.0" radius="49.0" stroke="BLACK" strokeType="INSIDE" />
                         <Label layoutX="72.0" layoutY="123.0" text="Welcome" textFill="WHITE">
@@ -131,10 +142,10 @@
                               <Font name="System Bold" size="14.0" />
                            </font>
                         </Label>
-                        <Button fx:id="availableBooksBtn" layoutX="32.0" layoutY="240.0" mnemonicParsing="false" prefHeight="31.0" prefWidth="136.0" styleClass="nav-btn" text="Available Books" textFill="WHITE" />
-                        <Button fx:id="issueBooksBtn" layoutX="34.0" layoutY="293.0" mnemonicParsing="false" prefHeight="31.0" prefWidth="132.0" styleClass="nav-btn" text="Issue Books" textFill="WHITE" />
-                        <Button fx:id="savedBooksBtn" layoutX="34.0" layoutY="385.0" mnemonicParsing="false" prefHeight="31.0" prefWidth="133.0" styleClass="nav-btn" text="Saved Books" textFill="WHITE" />
-                        <Button fx:id="returnBooksBtn" layoutX="33.0" layoutY="342.0" mnemonicParsing="false" prefHeight="31.0" prefWidth="134.0" styleClass="nav-btn" text="Return Books" textFill="WHITE" />
+                        <Button fx:id="availableBooksBtn" layoutX="32.0" layoutY="240.0" mnemonicParsing="false" onAction="#navButtonDesign" prefHeight="31.0" prefWidth="136.0" styleClass="nav-btn" text="Available Books" textFill="WHITE" />
+                        <Button fx:id="issueBooksBtn" layoutX="34.0" layoutY="293.0" mnemonicParsing="false" onAction="#navButtonDesign" prefHeight="31.0" prefWidth="132.0" styleClass="nav-btn" text="Issue Books" textFill="WHITE" />
+                        <Button fx:id="savedBooksBtn" layoutX="34.0" layoutY="385.0" mnemonicParsing="false" onAction="#navButtonDesign" prefHeight="31.0" prefWidth="133.0" styleClass="nav-btn" text="Saved Books" textFill="WHITE" />
+                        <Button fx:id="returnBooksBtn" layoutX="33.0" layoutY="342.0" mnemonicParsing="false" onAction="#navButtonDesign" prefHeight="31.0" prefWidth="134.0" styleClass="nav-btn" text="Return Books" textFill="WHITE" />
                         <Button fx:id="editBtn" layoutX="61.0" layoutY="29.0" mnemonicParsing="false" prefHeight="68.0" prefWidth="79.0" styleClass="edit-btn">
                            <graphic>
                               <ImageView fitHeight="18.0" fitWidth="26.0" pickOnBounds="true" preserveRatio="true">
@@ -163,7 +174,7 @@
          <center>
             <AnchorPane fx:id="mainCenterForm" prefHeight="510.0" prefWidth="786.0" BorderPane.alignment="CENTER">
                <children>
-                  <AnchorPane fx:id="availableBooksFont" layoutX="89.0" layoutY="55.0" prefHeight="510.0" prefWidth="786.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                  <AnchorPane fx:id="availableBooksForm" layoutX="89.0" layoutY="55.0" prefHeight="510.0" prefWidth="786.0" visible="false" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                      <children>
                         <AnchorPane layoutX="538.0" layoutY="145.0" prefHeight="510.0" prefWidth="786.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                            <children>
@@ -179,7 +190,7 @@
                                     </TableView>
                                  </children>
                               </AnchorPane>
-                              <AnchorPane layoutX="14.0" layoutY="14.0" prefHeight="472.0" prefWidth="242.0" styleClass="card-form">
+                              <AnchorPane fx:id="availableBookForm" layoutX="14.0" layoutY="14.0" prefHeight="472.0" prefWidth="242.0" styleClass="card-form">
                                  <children>
                                     <AnchorPane layoutX="54.0" layoutY="21.0" prefHeight="158.0" prefWidth="128.0" styleClass="image-card">
                                        <children>
@@ -192,7 +203,7 @@
                                           <Font size="16.0" />
                                        </font>
                                     </Label>
-                                    <Button fx:id="takeBtn" layoutX="158.0" layoutY="299.0" mnemonicParsing="false" prefHeight="29.0" prefWidth="64.0" styleClass="take-btn" text="Take" />
+                                    <Button fx:id="takeBtn" layoutX="158.0" layoutY="299.0" mnemonicParsing="false" onAction="#takeAvailableBook" prefHeight="29.0" prefWidth="64.0" styleClass="take-btn" text="Take" />
                                     <Label layoutX="108.0" layoutY="264.0" text="Title" />
                                  </children>
                               </AnchorPane>
@@ -201,7 +212,7 @@
                         </AnchorPane>
                      </children>
                   </AnchorPane>
-                  <AnchorPane layoutX="64.0" layoutY="29.0" prefHeight="510.0" prefWidth="786.0" visible="false" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                  <AnchorPane fx:id="issueForm" layoutX="64.0" layoutY="29.0" prefHeight="510.0" prefWidth="786.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                      <children>
                         <AnchorPane layoutX="268.0" layoutY="14.0" prefHeight="473.0" prefWidth="504.0" styleClass="card-form">
                            <children>
@@ -265,7 +276,7 @@
                            <children>
                               <AnchorPane layoutX="53.0" layoutY="14.0" prefHeight="162.0" prefWidth="127.0" styleClass="image-card">
                                  <children>
-                                    <ImageView fitHeight="162.0" fitWidth="127.0" layoutY="1.0" pickOnBounds="true" preserveRatio="true" />
+                                    <ImageView fx:id="bookToTakePoster" fitHeight="162.0" fitWidth="127.0" layoutY="1.0" pickOnBounds="true" preserveRatio="true" />
                                  </children>
                               </AnchorPane>
                               <AnchorPane layoutX="6.0" layoutY="206.0" prefHeight="144.0" prefWidth="223.0" styleClass="card-form">
@@ -290,18 +301,18 @@
                                           <Font size="14.0" />
                                        </font>
                                     </Label>
-                                    <Label layoutX="59.0" layoutY="21.0" prefHeight="18.0" prefWidth="157.0" text="Label" />
+                                    <Label fx:id="bookToTakeTitle" layoutX="59.0" layoutY="21.0" prefHeight="18.0" prefWidth="157.0" text="Label" />
                                     <Label layoutX="71.0" layoutY="52.0" prefHeight="18.0" prefWidth="145.0" text="Label" />
                                     <Label layoutX="69.0" layoutY="83.0" prefHeight="18.0" prefWidth="144.0" text="Label" />
                                     <Label layoutX="131.0" layoutY="115.0" prefHeight="18.0" prefWidth="83.0" text="Label" />
                                  </children>
                               </AnchorPane>
-                              <Button layoutX="37.0" layoutY="380.0" mnemonicParsing="false" prefHeight="34.0" prefWidth="63.0" text="Clear">
+                              <Button layoutX="37.0" layoutY="380.0" mnemonicParsing="false" prefHeight="34.0" prefWidth="63.0" styleClass="clear-btn" text="Clear">
                                  <font>
                                     <Font size="14.0" />
                                  </font>
                               </Button>
-                              <Button layoutX="126.0" layoutY="380.0" mnemonicParsing="false" prefHeight="34.0" prefWidth="63.0" text="Take">
+                              <Button layoutX="126.0" layoutY="380.0" mnemonicParsing="false" prefHeight="34.0" prefWidth="63.0" styleClass="take-btn" text="Take">
                                  <font>
                                     <Font size="14.0" />
                                  </font>
@@ -311,6 +322,8 @@
                         <Separator layoutX="256.0" layoutY="31.0" orientation="VERTICAL" prefHeight="437.0" prefWidth="7.0" />
                      </children>
                   </AnchorPane>
+                  <AnchorPane fx:id="returnBookForm" prefHeight="510.0" prefWidth="786.0" visible="false" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
+                  <AnchorPane fx:id="savedBookForm" prefHeight="510.0" prefWidth="786.0" visible="false" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
                </children>
             </AnchorPane>
          </center>
