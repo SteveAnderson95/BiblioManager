@@ -1,6 +1,10 @@
 package com.bibliomanager.controller;
 
+import com.bibliomanager.DatabaseHandler;
+import com.bibliomanager.dao.availableBook;
 import javafx.animation.TranslateTransition;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -11,6 +15,7 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
+import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
@@ -20,18 +25,19 @@ import javafx.stage.StageStyle;
 import javafx.util.Duration;
 
 import java.net.URL;
+import java.sql.*;
 import java.util.ResourceBundle;
 
 public class DashboardController implements Initializable {
     // abt = Available Books Table
     @FXML
-    private TableColumn<?, ?> abtBookAuthorCol;
+    private TableColumn<availableBook, String> abtBookAuthorCol;
     @FXML
-    private TableColumn<?, ?> abtBookTitleCol;
+    private TableColumn<availableBook, String> abtBookTitleCol;
     @FXML
-    private TableColumn<?, ?> abtBookTypeCol;
+    private TableColumn<availableBook, String> abtBookTypeCol;
     @FXML
-    private TableColumn<?, ?> abtPublishedDateCol;
+    private TableColumn<availableBook, Date> abtPublishedDateCol;
     @FXML
     private ImageView availableBookPoster;
     @FXML
@@ -41,7 +47,7 @@ public class DashboardController implements Initializable {
     @FXML
     private AnchorPane availableBooksFont;
     @FXML
-    private TableView<?> availableBooksTable;
+    private TableView<availableBook> availableBooksTable;
     @FXML
     private Circle circleImage;
     @FXML
@@ -84,6 +90,53 @@ public class DashboardController implements Initializable {
     private Button halfNav_takeBtn;
     @FXML
     private Circle smallCircle_image;
+
+    private Connection connect;
+    private PreparedStatement prepare;
+    private Statement statement;
+    private ResultSet result;
+
+    public ObservableList<availableBook> dataList () {
+
+        ObservableList<availableBook> booksList = FXCollections.observableArrayList();
+        String sql = " SELECT * FROM book";
+        connect = DatabaseHandler.connectDB();
+
+        try {
+
+            availableBook aBooks;
+            prepare = connect.prepareStatement(sql);
+            result = prepare.executeQuery();
+
+            while (result.next()) {
+                aBooks = new availableBook(
+                        result.getString("bookTitle"),
+                        result.getString("author"),
+                        result.getString("bookType"),
+                        result.getString("image"),
+                        result.getDate("date")
+                );
+                booksList.add(aBooks);
+            }
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return booksList;
+    }
+
+    private ObservableList<availableBook> booksList;
+    public void showAvailableBooks () {
+
+        booksList = dataList();
+
+        abtBookTitleCol.setCellValueFactory(new PropertyValueFactory<>("title"));
+        abtBookAuthorCol.setCellValueFactory(new PropertyValueFactory<>("author"));
+        abtBookTypeCol.setCellValueFactory(new PropertyValueFactory<>("genre"));
+        abtPublishedDateCol.setCellValueFactory(new PropertyValueFactory<>("publishedDate"));
+
+        availableBooksTable.setItems(booksList);
+    }
 
     private double x = 0;
     private double y = 0;
@@ -180,5 +233,6 @@ public class DashboardController implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
+        showAvailableBooks();
     }
 }

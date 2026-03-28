@@ -163,7 +163,7 @@
          <center>
             <AnchorPane fx:id="mainCenterForm" prefHeight="510.0" prefWidth="786.0" BorderPane.alignment="CENTER">
                <children>
-                  <AnchorPane fx:id="availableBooksFont" layoutX="89.0" layoutY="55.0" prefHeight="510.0" prefWidth="786.0" visible="false" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                  <AnchorPane fx:id="availableBooksFont" layoutX="89.0" layoutY="55.0" prefHeight="510.0" prefWidth="786.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                      <children>
                         <AnchorPane layoutX="538.0" layoutY="145.0" prefHeight="510.0" prefWidth="786.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                            <children>
@@ -201,7 +201,7 @@
                         </AnchorPane>
                      </children>
                   </AnchorPane>
-                  <AnchorPane layoutX="64.0" layoutY="29.0" prefHeight="510.0" prefWidth="786.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                  <AnchorPane layoutX="64.0" layoutY="29.0" prefHeight="510.0" prefWidth="786.0" visible="false" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                      <children>
                         <AnchorPane layoutX="268.0" layoutY="14.0" prefHeight="473.0" prefWidth="504.0" styleClass="card-form">
                            <children>
