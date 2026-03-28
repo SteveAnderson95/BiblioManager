@@ -123,7 +123,7 @@ public class LoginController {
                     Scene scene = new Scene(root, 986, 600);
                     stage.setScene(scene);
                     stage.initStyle(StageStyle.TRANSPARENT);
-                    stage.setMinHeight(649);
+                    stage.setMinHeight(600);
                     stage.setMinWidth(986);
                     stage.show();
                 }
