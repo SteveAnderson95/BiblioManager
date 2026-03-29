@@ -241,14 +241,14 @@
                                     <Font size="15.0" />
                                  </font>
                               </Label>
-                              <Label layoutX="233.0" layoutY="86.0" prefHeight="31.0" prefWidth="190.0" styleClass="label_take" text="Label">
+                              <Label fx:id="takeStudentNumber" layoutX="233.0" layoutY="86.0" prefHeight="31.0" prefWidth="190.0" styleClass="label_take" text="Label">
                                  <font>
                                     <Font size="15.0" />
                                  </font>
                               </Label>
-                              <TextField layoutX="233.0" layoutY="125.0" prefHeight="31.0" prefWidth="190.0" styleClass="textfield_take" />
-                              <TextField layoutX="233.0" layoutY="163.0" prefHeight="31.0" prefWidth="190.0" styleClass="textfield_take" />
-                              <ComboBox layoutX="233.0" layoutY="198.0" prefHeight="31.0" prefWidth="189.0" styleClass="label_take" />
+                              <TextField fx:id="takeFirstName" layoutX="233.0" layoutY="125.0" prefHeight="31.0" prefWidth="190.0" styleClass="textfield_take" />
+                              <TextField fx:id="takeLastName" layoutX="233.0" layoutY="163.0" prefHeight="31.0" prefWidth="190.0" styleClass="textfield_take" />
+                              <ComboBox fx:id="takeGender" layoutX="233.0" layoutY="198.0" onAction="#gender" prefHeight="31.0" prefWidth="189.0" styleClass="textfield_take" />
                               <Label layoutX="34.0" layoutY="247.0" text="Book details : ">
                                  <font>
                                     <Font name="System Bold" size="20.0" />
@@ -264,8 +264,8 @@
                                     <Font size="15.0" />
                                  </font>
                               </Label>
-                              <TextField layoutX="233.0" layoutY="294.0" prefHeight="31.0" prefWidth="190.0" styleClass="textfield_take" />
-                              <Label layoutX="233.0" layoutY="334.0" prefHeight="31.0" prefWidth="190.0" styleClass="label_take" text="Label">
+                              <TextField fx:id="takeBookDetailsTitle" layoutX="233.0" layoutY="294.0" prefHeight="31.0" prefWidth="190.0" styleClass="textfield_take" />
+                              <Label fx:id="takeBookDetailsDate" layoutX="233.0" layoutY="334.0" prefHeight="31.0" prefWidth="190.0" styleClass="label_take" text="Label">
                                  <font>
                                     <Font size="15.0" />
                                  </font>
@@ -276,7 +276,7 @@
                            <children>
                               <AnchorPane layoutX="53.0" layoutY="14.0" prefHeight="162.0" prefWidth="127.0" styleClass="image-card">
                                  <children>
-                                    <ImageView fx:id="bookToTakePoster" fitHeight="162.0" fitWidth="127.0" layoutY="1.0" pickOnBounds="true" preserveRatio="true" />
+                                    <ImageView fx:id="takeBookImage" fitHeight="162.0" fitWidth="127.0" layoutY="1.0" pickOnBounds="true" preserveRatio="true" />
                                  </children>
                               </AnchorPane>
                               <AnchorPane layoutX="6.0" layoutY="206.0" prefHeight="144.0" prefWidth="223.0" styleClass="card-form">
@@ -301,18 +301,18 @@
                                           <Font size="14.0" />
                                        </font>
                                     </Label>
-                                    <Label fx:id="bookToTakeTitle" layoutX="59.0" layoutY="21.0" prefHeight="18.0" prefWidth="157.0" text="Label" />
-                                    <Label layoutX="71.0" layoutY="52.0" prefHeight="18.0" prefWidth="145.0" text="Label" />
-                                    <Label layoutX="69.0" layoutY="83.0" prefHeight="18.0" prefWidth="144.0" text="Label" />
-                                    <Label layoutX="131.0" layoutY="115.0" prefHeight="18.0" prefWidth="83.0" text="Label" />
+                                    <Label fx:id="takeBookTitle" layoutX="59.0" layoutY="21.0" prefHeight="18.0" prefWidth="157.0" text="Label" />
+                                    <Label fx:id="takeBookAuthor" layoutX="71.0" layoutY="52.0" prefHeight="18.0" prefWidth="145.0" text="Label" />
+                                    <Label fx:id="takeBookType" layoutX="69.0" layoutY="83.0" prefHeight="18.0" prefWidth="144.0" text="Label" />
+                                    <Label fx:id="takeBookDate" layoutX="131.0" layoutY="115.0" prefHeight="18.0" prefWidth="83.0" text="Label" />
                                  </children>
                               </AnchorPane>
-                              <Button layoutX="37.0" layoutY="380.0" mnemonicParsing="false" prefHeight="34.0" prefWidth="63.0" styleClass="clear-btn" text="Clear">
+                              <Button fx:id="takeClearBtn" layoutX="37.0" layoutY="380.0" mnemonicParsing="false" prefHeight="34.0" prefWidth="63.0" styleClass="clear-btn" text="Clear">
                                  <font>
                                     <Font size="14.0" />
                                  </font>
                               </Button>
-                              <Button layoutX="126.0" layoutY="380.0" mnemonicParsing="false" prefHeight="34.0" prefWidth="63.0" styleClass="take-btn" text="Take">
+                              <Button fx:id="takeTakeBtn" layoutX="126.0" layoutY="380.0" mnemonicParsing="false" prefHeight="34.0" prefWidth="63.0" styleClass="take-btn" text="Take">
                                  <font>
                                     <Font size="14.0" />
                                  </font>

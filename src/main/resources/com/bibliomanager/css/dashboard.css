@@ -97,3 +97,13 @@
     -fx-border-width: .4px;
     -fx-background-radius: 5px;
 }
+.clear-btn {
+    -fx-background-color: #376282;
+    -fx-background-radius: 10px;
+    -fx-text-fill: #fff;
+    -fx-font-size: 14px;
+    -fx-cursor: hand;
+}
+.clear-btn:hover {
+    -fx-background-color: #4386b5;
+}

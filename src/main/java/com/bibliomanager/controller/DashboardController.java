@@ -12,10 +12,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.Button;
-import javafx.scene.control.Label;
-import javafx.scene.control.TableColumn;
-import javafx.scene.control.TableView;
+import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
@@ -28,6 +25,7 @@ import javafx.util.Duration;
 
 import java.net.URL;
 import java.sql.*;
+import java.util.Arrays;
 import java.util.ResourceBundle;
 
 public class DashboardController implements Initializable {
@@ -102,12 +100,46 @@ public class DashboardController implements Initializable {
     private AnchorPane returnBookForm;
     @FXML
     private Label currentFormLabel;
+    @FXML
+    private Label takeBookAuthor;
+    @FXML
+    private Label takeBookDate;
+    @FXML
+    private Label takeBookDetailsDate;
+    @FXML
+    private TextField takeBookDetailsTitle;
+    @FXML
+    private ImageView takeBookImage;
+    @FXML
+    private Label takeBookTitle;
+    @FXML
+    private Label takeBookType;
+    @FXML
+    private Button takeClearBtn;
+    @FXML
+    private TextField takeFirstName;
+    @FXML
+    private ComboBox<String> takeGender;
+    @FXML
+    private TextField takeLastName;
+    @FXML
+    private Label takeStudentNumber;
+    @FXML
+    private Button takeTakeBtn;
 
     private Image image;
     private Connection connect;
     private PreparedStatement prepare;
     private Statement statement;
     private ResultSet result;
+    private String comboBox[] = {"Male", "Female"};
+
+    public void gender () {
+        ObservableList<String> list = FXCollections.observableArrayList();
+        list.addAll(Arrays.asList(comboBox));
+        takeGender.setItems(list);
+
+    }
 
     public ObservableList<availableBook> dataList () {
 
@@ -359,5 +391,6 @@ public class DashboardController implements Initializable {
     public void initialize(URL url, ResourceBundle resourceBundle) {
         showAvailableBooks();
         setStudentNumberLabel();
+        gender();
     }
 }
