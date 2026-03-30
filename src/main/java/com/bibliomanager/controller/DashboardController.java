@@ -134,6 +134,52 @@ public class DashboardController implements Initializable {
     private ResultSet result;
     private String comboBox[] = {"Male", "Female"};
 
+    public  void findBooks (ActionEvent e) {
+
+        String sql = "SELECT * FROM book WHERE bookTitle = '" + takeBookDetailsTitle.getText() + "'";
+        connect = DatabaseHandler.connectDB();
+
+        try {
+
+            prepare = connect.prepareStatement(sql);
+            result = prepare.executeQuery();
+            boolean check = false;
+            Alert alert;
+
+            if(takeBookTitle.getText().isEmpty()) {
+                alert = new Alert(Alert.AlertType.ERROR);
+                alert.setTitle("Admin Message");
+                alert.setHeaderText(null);
+                alert.setContentText("Please select the book");
+                alert.showAndWait();
+            } else {
+                while(result.next()) {
+                    takeBookTitle.setText(result.getString("bookTitle"));
+                    takeBookAuthor.setText(result.getString("author"));
+                    takeBookType.setText(result.getString("bookType"));
+                    takeBookDate.setText(result.getString("date"));
+
+                    GetData.path = result.getString("image");
+                    String uri = "file:" + GetData.path;
+                    image = new Image(uri, 127, 162, false, true);
+                    takeBookImage.setImage(image);
+
+                    check = true;
+                }
+                if (!check) {
+                    takeBookTitle.setText("The book is not available !");
+                    takeBookAuthor.setText("");
+                    takeBookType.setText("");
+                    takeBookDate.setText("");
+                    takeBookImage.setImage(null);
+                }
+            }
+
+        } catch (Exception ex) {
+            ex.printStackTrace();
+        }
+    }
+
     public void gender () {
         ObservableList<String> list = FXCollections.observableArrayList();
         list.addAll(Arrays.asList(comboBox));
