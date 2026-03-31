@@ -16,6 +16,7 @@ import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.shape.Circle;
@@ -136,6 +137,8 @@ public class DashboardController implements Initializable {
 
     public  void findBooks (ActionEvent e) {
 
+        clearFindData();
+
         String sql = "SELECT * FROM book WHERE bookTitle = '" + takeBookDetailsTitle.getText() + "'";
         connect = DatabaseHandler.connectDB();
 
@@ -146,13 +149,21 @@ public class DashboardController implements Initializable {
             boolean check = false;
             Alert alert;
 
-            if(takeBookTitle.getText().isEmpty()) {
+            if(takeBookDetailsTitle.getText().isEmpty()) {
                 alert = new Alert(Alert.AlertType.ERROR);
                 alert.setTitle("Admin Message");
                 alert.setHeaderText(null);
                 alert.setContentText("Please select the book");
                 alert.showAndWait();
-            } else {
+            } else if (takeFirstName.getText().isEmpty()
+                    || takeLastName.getText().isEmpty()
+                    || takeGender.getSelectionModel().isEmpty()) {
+                alert = new Alert(Alert.AlertType.ERROR);
+                alert.setTitle("Admin Message");
+                alert.setHeaderText(null);
+                alert.setContentText("Please type student complete details");
+                alert.showAndWait();
+            }else {
                 while(result.next()) {
                     takeBookTitle.setText(result.getString("bookTitle"));
                     takeBookAuthor.setText(result.getString("author"));
@@ -168,16 +179,33 @@ public class DashboardController implements Initializable {
                 }
                 if (!check) {
                     takeBookTitle.setText("The book is not available !");
-                    takeBookAuthor.setText("");
-                    takeBookType.setText("");
-                    takeBookDate.setText("");
-                    takeBookImage.setImage(null);
                 }
             }
 
         } catch (Exception ex) {
             ex.printStackTrace();
         }
+    }
+
+    public void StudentNumberLabel () {
+        takeStudentNumber.setText(GetData.studentNumber);
+    }
+
+    public void clearTakeData () {
+        takeBookDetailsTitle.setText();
+        takeBookTitle.setText("");
+        takeBookAuthor.setText("");
+        takeBookType.setText("");
+        takeBookDate.setText("");
+        takeBookImage.setImage(null);
+    }
+
+    public void clearFindData () {
+        takeBookTitle.setText("");
+        takeBookAuthor.setText("");
+        takeBookType.setText("");
+        takeBookDate.setText("");
+        takeBookImage.setImage(null);
     }
 
     public void gender () {
@@ -437,6 +465,7 @@ public class DashboardController implements Initializable {
     public void initialize(URL url, ResourceBundle resourceBundle) {
         showAvailableBooks();
         setStudentNumberLabel();
+        StudentNumberLabel();
         gender();
     }
 }

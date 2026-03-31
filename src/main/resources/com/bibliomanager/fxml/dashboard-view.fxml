@@ -248,7 +248,7 @@
                               </Label>
                               <TextField fx:id="takeFirstName" layoutX="233.0" layoutY="125.0" prefHeight="31.0" prefWidth="190.0" styleClass="textfield_take" />
                               <TextField fx:id="takeLastName" layoutX="233.0" layoutY="163.0" prefHeight="31.0" prefWidth="190.0" styleClass="textfield_take" />
-                              <ComboBox fx:id="takeGender" layoutX="233.0" layoutY="198.0" onAction="#gender" prefHeight="31.0" prefWidth="189.0" styleClass="textfield_take" />
+                              <ComboBox fx:id="takeGender" layoutX="233.0" layoutY="198.0" onAction="#gender" prefHeight="31.0" prefWidth="189.0" promptText="Choose..." styleClass="textfield_take" />
                               <Label layoutX="34.0" layoutY="247.0" text="Book details : ">
                                  <font>
                                     <Font name="System Bold" size="20.0" />
@@ -264,7 +264,7 @@
                                     <Font size="15.0" />
                                  </font>
                               </Label>
-                              <TextField fx:id="takeBookDetailsTitle" layoutX="233.0" layoutY="294.0" prefHeight="31.0" prefWidth="190.0" styleClass="textfield_take" />
+                              <TextField fx:id="takeBookDetailsTitle" layoutX="233.0" layoutY="294.0" onAction="#findBooks" prefHeight="31.0" prefWidth="190.0" styleClass="textfield_take" />
                               <Label fx:id="takeBookDetailsDate" layoutX="233.0" layoutY="334.0" prefHeight="31.0" prefWidth="190.0" styleClass="label_take" text="Label">
                                  <font>
                                     <Font size="15.0" />
@@ -307,7 +307,7 @@
                                     <Label fx:id="takeBookDate" layoutX="131.0" layoutY="115.0" prefHeight="18.0" prefWidth="83.0" text="Label" />
                                  </children>
                               </AnchorPane>
-                              <Button fx:id="takeClearBtn" layoutX="37.0" layoutY="380.0" mnemonicParsing="false" prefHeight="34.0" prefWidth="63.0" styleClass="clear-btn" text="Clear">
+                              <Button fx:id="takeClearBtn" layoutX="37.0" layoutY="380.0" mnemonicParsing="false" onAction="#clearTakeData" prefHeight="34.0" prefWidth="63.0" styleClass="clear-btn" text="Clear">
                                  <font>
                                     <Font size="14.0" />
                                  </font>
