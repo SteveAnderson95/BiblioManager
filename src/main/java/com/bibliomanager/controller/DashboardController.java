@@ -26,6 +26,7 @@ import javafx.util.Duration;
 
 import java.net.URL;
 import java.sql.*;
+import java.text.SimpleDateFormat;
 import java.util.Arrays;
 import java.util.ResourceBundle;
 
@@ -192,7 +193,7 @@ public class DashboardController implements Initializable {
     }
 
     public void clearTakeData () {
-        takeBookDetailsTitle.setText();
+        takeBookDetailsTitle.setText("");
         takeBookTitle.setText("");
         takeBookAuthor.setText("");
         takeBookType.setText("");
@@ -212,6 +213,18 @@ public class DashboardController implements Initializable {
         ObservableList<String> list = FXCollections.observableArrayList();
         list.addAll(Arrays.asList(comboBox));
         takeGender.setItems(list);
+
+    }
+
+    public void displayDate () {
+        SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
+        String date = format.format(new java.util.Date());
+        takeBookDetailsDate.setText(date);
+    }
+
+    public void takeBook () {
+
+
 
     }
 
@@ -465,6 +478,7 @@ public class DashboardController implements Initializable {
     public void initialize(URL url, ResourceBundle resourceBundle) {
         showAvailableBooks();
         setStudentNumberLabel();
+        displayDate();
         StudentNumberLabel();
         gender();
     }
