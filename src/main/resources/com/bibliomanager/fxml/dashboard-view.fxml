@@ -312,7 +312,7 @@
                                     <Font size="14.0" />
                                  </font>
                               </Button>
-                              <Button fx:id="takeTakeBtn" layoutX="126.0" layoutY="380.0" mnemonicParsing="false" prefHeight="34.0" prefWidth="63.0" styleClass="take-btn" text="Take">
+                              <Button fx:id="takeTakeBtn" layoutX="126.0" layoutY="380.0" mnemonicParsing="false" onAction="#takeBook" prefHeight="34.0" prefWidth="63.0" styleClass="take-btn" text="Take">
                                  <font>
                                     <Font size="14.0" />
                                  </font>

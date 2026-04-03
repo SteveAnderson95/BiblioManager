@@ -141,12 +141,12 @@ public class DashboardController implements Initializable {
         clearFindData();
 
         String sql = "SELECT * FROM book WHERE bookTitle = '" + takeBookDetailsTitle.getText() + "'";
-        connect = DatabaseHandler.connectDB();
+//        connect = DatabaseHandler.connectDB();
 
-        try {
+        try (Connection connect = DatabaseHandler.connectDB();
+            PreparedStatement prepare = connect.prepareStatement(sql);
+            ResultSet result = prepare.executeQuery()){
 
-            prepare = connect.prepareStatement(sql);
-            result = prepare.executeQuery();
             boolean check = false;
             Alert alert;
 
@@ -156,7 +156,7 @@ public class DashboardController implements Initializable {
                 alert.setHeaderText(null);
                 alert.setContentText("Please select the book");
                 alert.showAndWait();
-            } else if (takeFirstName.getText().isEmpty()
+            } /*else if (takeFirstName.getText().isEmpty()
                     || takeLastName.getText().isEmpty()
                     || takeGender.getSelectionModel().isEmpty()) {
                 alert = new Alert(Alert.AlertType.ERROR);
@@ -164,7 +164,7 @@ public class DashboardController implements Initializable {
                 alert.setHeaderText(null);
                 alert.setContentText("Please type student complete details");
                 alert.showAndWait();
-            }else {
+            }*/else {
                 while(result.next()) {
                     takeBookTitle.setText(result.getString("bookTitle"));
                     takeBookAuthor.setText(result.getString("author"));
@@ -224,21 +224,67 @@ public class DashboardController implements Initializable {
 
     public void takeBook () {
 
+        java.util.Date date = new java.util.Date();
+        java.sql.Date sqlDate = new java.sql.Date(date.getTime());
+
+        String sql = "INSERT INTO takenBooks VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
+
+        try (Connection connect = DatabaseHandler.connectDB();
+            PreparedStatement prepare = connect.prepareStatement(sql)) {
+            Alert alert;
+            if (takeFirstName.getText().isEmpty()
+                    || takeLastName.getText().isEmpty()
+                    || takeGender.getSelectionModel().isEmpty()) {
+                alert = new Alert(Alert.AlertType.ERROR);
+                alert.setTitle("Admin Message");
+                alert.setHeaderText(null);
+                alert.setContentText("Please type student complete details");
+                alert.showAndWait();
+            } else if (takeBookTitle.getText().isEmpty()) {
+                alert = new Alert(Alert.AlertType.ERROR);
+                alert.setTitle("Admin Message");
+                alert.setHeaderText(null);
+                alert.setContentText("Please indicate the book you want to take !");
+                alert.showAndWait();
+            } else {
+//                prepare = connect.prepareStatement(sql);
+                prepare.setString(1, takeStudentNumber.getText());
+                prepare.setString(2, takeFirstName.getText());
+                prepare.setString(3, takeLastName.getText());
+                prepare.setString(4, (String) takeGender.getSelectionModel().getSelectedItem());
+                prepare.setString(5, takeBookTitle.getText());
+                prepare.setString(6, GetData.path);
+                prepare.setDate(7, sqlDate);
+                String check = "Not returned";
+                prepare.setString(8, check);
+
+                prepare.executeUpdate();
+
+                alert = new Alert(Alert.AlertType.INFORMATION);
+                alert.setTitle("Admin Message");
+                alert.setHeaderText(null);
+                alert.setContentText("Successfully take da book !");
+                alert.showAndWait();
+                clearTakeData();
+            }
 
 
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
     public ObservableList<availableBook> dataList () {
 
         ObservableList<availableBook> booksList = FXCollections.observableArrayList();
         String sql = " SELECT * FROM book";
-        connect = DatabaseHandler.connectDB();
+//        connect = DatabaseHandler.connectDB();
 
-        try {
+        try (Connection connect = DatabaseHandler.connectDB();
+             PreparedStatement prepare = connect.prepareStatement(sql);
+             ResultSet result = prepare.executeQuery()){
 
             availableBook aBooks;
-            prepare = connect.prepareStatement(sql);
-            result = prepare.executeQuery();
 
             while (result.next()) {
                 aBooks = new availableBook(

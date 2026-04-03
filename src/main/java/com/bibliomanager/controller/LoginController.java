@@ -76,65 +76,67 @@ public class LoginController {
     public void login () {
 
         String sql = "SELECT * FROM students WHERE studentNumber = ? AND password = ?";
-        connection = DatabaseHandler.connectDB();
+//        connection = DatabaseHandler.connectDB();
 
-        try {
-            pstmt = connection.prepareStatement(sql);
+        try (Connection connection = DatabaseHandler.connectDB();
+        PreparedStatement pstmt = connection.prepareStatement(sql)){
+
             pstmt.setString(1, studentNumber.getText());
             pstmt.setString(2, studentPassword.getText());
-            resultSet = pstmt.executeQuery();
-
             Alert alert;
 
-            if (studentNumber.getText().isBlank() || studentPassword.getText().isBlank()) {
-                alert = new Alert(Alert.AlertType.ERROR);
-                alert.setTitle("Admin Message");
-                alert.setHeaderText(null);
-                alert.setContentText("Please, fill all blank fields.");
-                alert.showAndWait();
-            }
-            else {
-                if (resultSet.next()) {
-
-                    GetData.studentNumber = studentNumber.getText();
-
-                    alert = new Alert(Alert.AlertType.INFORMATION);
-                    alert.setTitle("Admin Message");
-                    alert.setHeaderText(null);
-                    alert.setContentText("Successfully login !");
-                    alert.showAndWait();
-
-                    //TO HIDE THE LOGIN FORM
-                    loginBtn.getScene().getWindow().hide();
-
-                    //FOR DASHBOARD
-                    Parent root = FXMLLoader.load(getClass().getResource("/com/bibliomanager/fxml/dashboard-view.fxml"));
-                    Stage stage = new Stage();
-
-                    root.setOnMousePressed((MouseEvent e) -> {
-                        x = e.getSceneX();
-                        y = e.getSceneY();
-                    });
-                    root.setOnMouseDragged((MouseEvent e) -> {
-                        stage.setX(e.getScreenX() - x);
-                        stage.setY(e.getScreenY() - y);
-                    });
-
-                    Scene scene = new Scene(root, 986, 600);
-                    stage.setScene(scene);
-                    stage.initStyle(StageStyle.TRANSPARENT);
-                    stage.setMinHeight(600);
-                    stage.setMinWidth(986);
-                    stage.show();
-                }
-                else {
+            try (ResultSet resultSet = pstmt.executeQuery()) {
+                if (studentNumber.getText().isBlank() || studentPassword.getText().isBlank()) {
                     alert = new Alert(Alert.AlertType.ERROR);
                     alert.setTitle("Admin Message");
                     alert.setHeaderText(null);
-                    alert.setContentText("Wrong username or password");
+                    alert.setContentText("Please, fill all blank fields.");
                     alert.showAndWait();
                 }
+                else {
+                    if (resultSet.next()) {
+
+                        GetData.studentNumber = studentNumber.getText();
+
+                        alert = new Alert(Alert.AlertType.INFORMATION);
+                        alert.setTitle("Admin Message");
+                        alert.setHeaderText(null);
+                        alert.setContentText("Successfully login !");
+                        alert.showAndWait();
+
+                        //TO HIDE THE LOGIN FORM
+                        loginBtn.getScene().getWindow().hide();
+
+                        //FOR DASHBOARD
+                        Parent root = FXMLLoader.load(getClass().getResource("/com/bibliomanager/fxml/dashboard-view.fxml"));
+                        Stage stage = new Stage();
+
+                        root.setOnMousePressed((MouseEvent e) -> {
+                            x = e.getSceneX();
+                            y = e.getSceneY();
+                        });
+                        root.setOnMouseDragged((MouseEvent e) -> {
+                            stage.setX(e.getScreenX() - x);
+                            stage.setY(e.getScreenY() - y);
+                        });
+
+                        Scene scene = new Scene(root, 986, 600);
+                        stage.setScene(scene);
+                        stage.initStyle(StageStyle.TRANSPARENT);
+                        stage.setMinHeight(600);
+                        stage.setMinWidth(986);
+                        stage.show();
+                    }
+                    else {
+                        alert = new Alert(Alert.AlertType.ERROR);
+                        alert.setTitle("Admin Message");
+                        alert.setHeaderText(null);
+                        alert.setContentText("Wrong username or password");
+                        alert.showAndWait();
+                    }
+                }
             }
+
         } catch (Exception e) {
             System.err.println(e.getMessage());
         }
