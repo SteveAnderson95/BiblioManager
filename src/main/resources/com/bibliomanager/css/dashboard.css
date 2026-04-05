@@ -116,3 +116,13 @@
 .return-btn:hover {
     -fx-background-color: #3686ae;
 }
+.unsave-btn {
+    -fx-background-color: #8c2d2d;
+    -fx-background-radius: 10px;
+    -fx-text-fill: #fff;
+    -fx-cursor: hand;
+    -fx-font-size: 15px;
+}
+.unsave-btn:hover {
+    -fx-background-color: #c54d5d;
+}

@@ -8,5 +8,6 @@ module com.bibliomanager {
     exports com.bibliomanager;
     exports com.bibliomanager.controller;
     opens com.bibliomanager.controller to javafx.fxml, java.base;
-    opens com.bibliomanager.dao to javafx.base;
+    exports com.bibliomanager.dao;
+    opens com.bibliomanager.dao to java.base, javafx.base, javafx.fxml;
 }

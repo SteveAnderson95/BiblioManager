@@ -197,7 +197,7 @@
                                           <ImageView fx:id="availableBookPoster" fitHeight="171.0" fitWidth="134.0" layoutY="2.0" pickOnBounds="true" preserveRatio="true" />
                                        </children>
                                     </AnchorPane>
-                                    <Button fx:id="saveBtn" layoutX="9.0" layoutY="299.0" mnemonicParsing="false" prefHeight="29.0" prefWidth="64.0" styleClass="save-btn" text="Save" />
+                                    <Button fx:id="saveBtn" layoutX="9.0" layoutY="299.0" mnemonicParsing="false" onAction="#saveBooks" prefHeight="29.0" prefWidth="64.0" styleClass="save-btn" text="Save" />
                                     <Label fx:id="availableBookTitle" alignment="CENTER" layoutX="14.0" layoutY="225.0" prefHeight="22.0" prefWidth="215.0">
                                        <font>
                                           <Font size="16.0" />
@@ -361,21 +361,31 @@
                      <children>
                         <AnchorPane layoutX="14.0" layoutY="14.0" prefHeight="228.0" prefWidth="758.0" styleClass="card-form">
                            <children>
-                              <TableView layoutX="233.0" layoutY="14.0" prefHeight="200.0" prefWidth="516.0">
+                              <TableView fx:id="saveTableView" layoutX="233.0" layoutY="14.0" onMouseClicked="#selectSavedBook" prefHeight="200.0" prefWidth="516.0">
                                 <columns>
-                                  <TableColumn prefWidth="75.0" text="C1" />
-                                  <TableColumn prefWidth="75.0" text="C2" />
+                                  <TableColumn fx:id="saveColTitle" prefWidth="143.0" text="Book Title" />
+                                  <TableColumn fx:id="saveColAuthor" prefWidth="125.0" text="Author" />
+                                    <TableColumn fx:id="saveColType" prefWidth="121.0" text="Book Type" />
+                                    <TableColumn fx:id="saveColDate" prefWidth="126.0" text="Issued Date" />
                                 </columns>
                               </TableView>
-                              <AnchorPane layoutX="54.0" layoutY="14.0" prefHeight="149.0" prefWidth="126.0">
+                              <AnchorPane layoutX="54.0" layoutY="14.0" prefHeight="149.0" prefWidth="126.0" styleClass="image-card">
                                  <children>
-                                    <ImageView fitHeight="149.0" fitWidth="126.0" pickOnBounds="true" preserveRatio="true" />
+                                    <ImageView fx:id="saveImageView" fitHeight="149.0" fitWidth="126.0" pickOnBounds="true" preserveRatio="true" />
                                  </children>
                               </AnchorPane>
-                              <Button layoutX="71.0" layoutY="179.0" mnemonicParsing="false" prefHeight="29.0" prefWidth="75.0" text="Button" />
+                              <Button fx:id="saveUnsaveBtn" layoutX="71.0" layoutY="179.0" mnemonicParsing="false" onAction="#unsaveBooks" prefHeight="29.0" prefWidth="75.0" styleClass="unsave-btn" text="Unsave" textFill="WHITE" />
                            </children>
                         </AnchorPane>
-                        <AnchorPane layoutX="14.0" layoutY="267.0" prefHeight="217.0" prefWidth="759.0" styleClass="card-form" />
+                        <AnchorPane layoutX="14.0" layoutY="267.0" prefHeight="217.0" prefWidth="759.0" styleClass="card-form">
+                           <children>
+                              <ImageView fitHeight="184.0" fitWidth="727.0" layoutX="14.0" layoutY="17.0" pickOnBounds="true">
+                                 <image>
+                                    <Image url="@../images/icons/banner.jpg" />
+                                 </image>
+                              </ImageView>
+                           </children>
+                        </AnchorPane>
                         <Separator layoutX="43.0" layoutY="255.0" prefHeight="0.0" prefWidth="700.0" />
                      </children></AnchorPane>
                </children>
