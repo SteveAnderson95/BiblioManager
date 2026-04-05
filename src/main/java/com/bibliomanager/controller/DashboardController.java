@@ -129,6 +129,22 @@ public class DashboardController implements Initializable {
     @FXML
     private Button takeTakeBtn;
 
+    @FXML
+    private TableColumn<ReturnBook, String> returnAuthor;
+    @FXML
+    private TableColumn<ReturnBook, String> returnBookTitle;
+    @FXML
+    private TableColumn<ReturnBook, String> returnBookType;
+    @FXML
+    private ImageView returnImageView;
+    @FXML
+    private TableColumn<ReturnBook, java.util.Date> returnIssuedDate;
+    @FXML
+    private TableView<ReturnBook> returnTableView;
+    @FXML
+    private Button returnUnsaveButton;
+
+
     private Image image;
     private Connection connect;
     private PreparedStatement prepare;
@@ -227,7 +243,9 @@ public class DashboardController implements Initializable {
         java.util.Date date = new java.util.Date();
         java.sql.Date sqlDate = new java.sql.Date(date.getTime());
 
-        String sql = "INSERT INTO takenBooks VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
+        String sql = "INSERT INTO takenBooks (studentNumber, firstName, lastName, gender, bookTitle, " +
+                "author, bookType, image, date, checkReturn)\n" +
+                "VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
 
         try (Connection connect = DatabaseHandler.connectDB();
             PreparedStatement prepare = connect.prepareStatement(sql)) {
@@ -253,12 +271,15 @@ public class DashboardController implements Initializable {
                 prepare.setString(3, takeLastName.getText());
                 prepare.setString(4, (String) takeGender.getSelectionModel().getSelectedItem());
                 prepare.setString(5, takeBookTitle.getText());
-                prepare.setString(6, GetData.path);
-                prepare.setDate(7, sqlDate);
+                prepare.setString(8, GetData.path);
+                prepare.setDate(9, sqlDate);
                 String check = "Not returned";
-                prepare.setString(8, check);
+                prepare.setString(10, check);
+                prepare.setString(6, takeBookAuthor.getText());
+                prepare.setString(7, takeBookType.getText());
 
                 prepare.executeUpdate();
+                showReturnBooks();
 
                 alert = new Alert(Alert.AlertType.INFORMATION);
                 alert.setTitle("Admin Message");
@@ -272,6 +293,96 @@ public class DashboardController implements Initializable {
         } catch (Exception e) {
             e.printStackTrace();
         }
+    }
+
+    //RETURN FORM
+    public ObservableList<ReturnBook> returnBookData () {
+
+        ObservableList<ReturnBook>  listReturnBook = FXCollections.observableArrayList();
+
+        String checkReturn = "Not returned";
+
+        String sql = "SELECT * FROM takenBooks WHERE checkReturn = '" + checkReturn + "'" +
+                "and studentNumber = '" + GetData.studentNumber + "'";
+
+        Alert alert;
+
+        try (Connection connect = DatabaseHandler.connectDB();
+            PreparedStatement pstmt = connect.prepareStatement(sql);
+            ResultSet result = pstmt.executeQuery()
+        ) {
+            ReturnBook returnBook;
+            while (result.next()) {
+                returnBook = new ReturnBook(result.getString("bookTitle"),
+                        result.getString("author"),
+                        result.getString("bookType"),
+                        result.getDate("date"),
+                        result.getString("image"));
+                listReturnBook.add(returnBook);
+            }
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return listReturnBook;
+    }
+
+    public void returnBooks () {
+
+        String sql = "UPDATE takenBooks SET checkReturn = 'Returned' WHERE bookTitle = '" + GetData.takeBookTitle + "'";
+        Alert alert;
+
+        try (
+                Connection connect = DatabaseHandler.connectDB();
+                Statement stmt = connect.createStatement()
+        ) {
+            if (returnImageView.getImage() == null) {
+                alert = new Alert(Alert.AlertType.ERROR);
+                alert.setTitle("Admin Message");
+                alert.setHeaderText(null);
+                alert.setContentText("Please the book you want to return !");
+                alert.showAndWait();
+            } else {
+                stmt.executeUpdate(sql);
+                alert = new Alert(Alert.AlertType.INFORMATION);
+                alert.setTitle("Admin Message");
+                alert.setHeaderText(null);
+                alert.setContentText("Successfully returned !");
+                alert.showAndWait();
+                showReturnBooks();
+            }
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    private ObservableList<ReturnBook> returnData;
+
+    public void showReturnBooks() {
+
+        returnData = returnBookData();
+
+        returnBookTitle.setCellValueFactory(new PropertyValueFactory<>("title"));
+        returnAuthor.setCellValueFactory(new PropertyValueFactory<>("author"));
+        returnBookType.setCellValueFactory(new PropertyValueFactory<>("genre"));
+        returnIssuedDate.setCellValueFactory(new PropertyValueFactory<>("date"));
+
+        returnTableView.setItems(returnData);
+    }
+
+    public void selectReturnBook () {
+
+        ReturnBook rbook = returnTableView.getSelectionModel().getSelectedItem();
+        int num = returnTableView.getSelectionModel().getFocusedIndex();
+
+        if ((num -1) < -1)
+            return;
+
+        String uri = "file:" + rbook.getImage();
+        image = new Image(uri, 152, 170, false, true);
+        returnImageView.setImage(image);
+        GetData.takeBookTitle = rbook.getTitle();
     }
 
     public ObservableList<availableBook> dataList () {
@@ -386,6 +497,8 @@ public class DashboardController implements Initializable {
             halfNav_issueBtn.setStyle("-fx-background-color: linear-gradient(to bottom right, #344275, #3a6389);");
             halfNav_availableBtn.setStyle("-fx-background-color: linear-gradient(to bottom right, #344275, #3a6389);");
             halfNav_saveBtn.setStyle("-fx-background-color: linear-gradient(to bottom right, #344275, #3a6389);");
+
+            showReturnBooks();
 
 
         } else if (e.getSource() == savedBooksBtn || e.getSource() == halfNav_saveBtn) {
@@ -527,5 +640,6 @@ public class DashboardController implements Initializable {
         displayDate();
         StudentNumberLabel();
         gender();
+        showReturnBooks();
     }
 }

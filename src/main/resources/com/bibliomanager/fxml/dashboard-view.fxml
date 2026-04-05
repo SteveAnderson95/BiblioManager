@@ -212,7 +212,7 @@
                         </AnchorPane>
                      </children>
                   </AnchorPane>
-                  <AnchorPane fx:id="issueForm" layoutX="64.0" layoutY="29.0" prefHeight="510.0" prefWidth="786.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                  <AnchorPane fx:id="issueForm" layoutX="64.0" layoutY="29.0" prefHeight="510.0" prefWidth="786.0" visible="false" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                      <children>
                         <AnchorPane layoutX="268.0" layoutY="14.0" prefHeight="473.0" prefWidth="504.0" styleClass="card-form">
                            <children>
@@ -322,8 +322,62 @@
                         <Separator layoutX="256.0" layoutY="31.0" orientation="VERTICAL" prefHeight="437.0" prefWidth="7.0" />
                      </children>
                   </AnchorPane>
-                  <AnchorPane fx:id="returnBookForm" prefHeight="510.0" prefWidth="786.0" visible="false" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
-                  <AnchorPane fx:id="savedBookForm" prefHeight="510.0" prefWidth="786.0" visible="false" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
+                  <AnchorPane fx:id="returnBookForm" prefHeight="510.0" prefWidth="786.0" visible="false" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                     <children>
+                        <AnchorPane layoutX="331.0" layoutY="14.0" prefHeight="470.0" prefWidth="483.0" styleClass="card-form" AnchorPane.bottomAnchor="14.0" AnchorPane.rightAnchor="14.0" AnchorPane.topAnchor="14.0">
+                           <children>
+                              <Label layoutX="14.0" layoutY="14.0" text="Issued Books : ">
+                                 <font>
+                                    <Font size="20.0" />
+                                 </font>
+                              </Label>
+                              <TableView fx:id="returnTableView" layoutX="14.0" layoutY="53.0" onMouseClicked="#selectReturnBook" prefHeight="404.0" prefWidth="456.0">
+                                <columns>
+                                  <TableColumn fx:id="returnBookTitle" prefWidth="134.0" text="Book Title" />
+                                  <TableColumn fx:id="returnAuthor" prefWidth="115.0" text="Author" />
+                                    <TableColumn fx:id="returnBookType" prefWidth="105.0" text="Book Type" />
+                                    <TableColumn fx:id="returnIssuedDate" prefWidth="100.0" text="Issued Date" />
+                                </columns>
+                              </TableView>
+                           </children>
+                        </AnchorPane>
+                        <AnchorPane layoutX="14.0" layoutY="18.0" prefHeight="470.0" prefWidth="255.0" styleClass="card-form" AnchorPane.bottomAnchor="14.0" AnchorPane.leftAnchor="14.0" AnchorPane.topAnchor="14.0">
+                           <children>
+                              <AnchorPane layoutX="52.0" layoutY="24.0" prefHeight="170.0" prefWidth="152.0" styleClass="image-card">
+                                 <children>
+                                    <ImageView fx:id="returnImageView" fitHeight="170.0" fitWidth="152.0" layoutY="3.0" pickOnBounds="true" preserveRatio="true" />
+                                 </children>
+                              </AnchorPane>
+                              <Button fx:id="returnUnsaveButton" layoutX="90.0" layoutY="249.0" mnemonicParsing="false" onAction="#returnBooks" prefHeight="37.0" prefWidth="75.0" styleClass="return-btn" text="Return">
+                                 <font>
+                                    <Font size="15.0" />
+                                 </font>
+                              </Button>
+                           </children>
+                        </AnchorPane>
+                        <Separator layoutX="277.0" layoutY="31.0" orientation="VERTICAL" prefHeight="437.0" prefWidth="5.0" />
+                     </children></AnchorPane>
+                  <AnchorPane fx:id="savedBookForm" prefHeight="510.0" prefWidth="786.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                     <children>
+                        <AnchorPane layoutX="14.0" layoutY="14.0" prefHeight="228.0" prefWidth="758.0" styleClass="card-form">
+                           <children>
+                              <TableView layoutX="233.0" layoutY="14.0" prefHeight="200.0" prefWidth="516.0">
+                                <columns>
+                                  <TableColumn prefWidth="75.0" text="C1" />
+                                  <TableColumn prefWidth="75.0" text="C2" />
+                                </columns>
+                              </TableView>
+                              <AnchorPane layoutX="54.0" layoutY="14.0" prefHeight="149.0" prefWidth="126.0">
+                                 <children>
+                                    <ImageView fitHeight="149.0" fitWidth="126.0" pickOnBounds="true" preserveRatio="true" />
+                                 </children>
+                              </AnchorPane>
+                              <Button layoutX="71.0" layoutY="179.0" mnemonicParsing="false" prefHeight="29.0" prefWidth="75.0" text="Button" />
+                           </children>
+                        </AnchorPane>
+                        <AnchorPane layoutX="14.0" layoutY="267.0" prefHeight="217.0" prefWidth="759.0" styleClass="card-form" />
+                        <Separator layoutX="43.0" layoutY="255.0" prefHeight="0.0" prefWidth="700.0" />
+                     </children></AnchorPane>
                </children>
             </AnchorPane>
          </center>
