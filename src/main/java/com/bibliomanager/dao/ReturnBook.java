@@ -1,4 +1,4 @@
-package com.bibliomanager.controller;
+package com.bibliomanager.dao;
 
 import java.util.Date;
 
