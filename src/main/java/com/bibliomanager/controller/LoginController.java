@@ -95,7 +95,7 @@ public class LoginController {
                 }
                 else {
                     if (resultSet.next()) {
-
+                        GetData.path = resultSet.getString("image");
                         GetData.studentNumber = studentNumber.getText();
 
                         alert = new Alert(Alert.AlertType.INFORMATION);
@@ -138,7 +138,7 @@ public class LoginController {
             }
 
         } catch (Exception e) {
-            System.err.println(e.getMessage());
+            e.printStackTrace();
         }
     }
 }

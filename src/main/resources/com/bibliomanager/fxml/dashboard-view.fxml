@@ -146,7 +146,7 @@
                         <Button fx:id="issueBooksBtn" layoutX="34.0" layoutY="293.0" mnemonicParsing="false" onAction="#navButtonDesign" prefHeight="31.0" prefWidth="132.0" styleClass="nav-btn" text="Issue Books" textFill="WHITE" />
                         <Button fx:id="savedBooksBtn" layoutX="34.0" layoutY="385.0" mnemonicParsing="false" onAction="#navButtonDesign" prefHeight="31.0" prefWidth="133.0" styleClass="nav-btn" text="Saved Books" textFill="WHITE" />
                         <Button fx:id="returnBooksBtn" layoutX="33.0" layoutY="342.0" mnemonicParsing="false" onAction="#navButtonDesign" prefHeight="31.0" prefWidth="134.0" styleClass="nav-btn" text="Return Books" textFill="WHITE" />
-                        <Button fx:id="editBtn" layoutX="61.0" layoutY="29.0" mnemonicParsing="false" prefHeight="68.0" prefWidth="79.0" styleClass="edit-btn">
+                        <Button fx:id="editBtn" layoutX="61.0" layoutY="29.0" mnemonicParsing="false" onAction="#insertImage" prefHeight="68.0" prefWidth="79.0" styleClass="edit-btn">
                            <graphic>
                               <ImageView fitHeight="18.0" fitWidth="26.0" pickOnBounds="true" preserveRatio="true">
                                  <image>

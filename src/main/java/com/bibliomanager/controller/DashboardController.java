@@ -20,11 +20,14 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
+import javafx.scene.paint.ImagePattern;
 import javafx.scene.shape.Circle;
+import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 import javafx.util.Duration;
 
+import java.io.File;
 import java.net.URL;
 import java.sql.*;
 import java.text.SimpleDateFormat;
@@ -316,7 +319,7 @@ public class DashboardController implements Initializable {
 
         ObservableList<SavedBook> listSavedData = FXCollections.observableArrayList();
 
-        String sql = "SELECT * FROM savedBooks";
+        String sql = "SELECT * FROM savedBooks WHERE studentNumber = '" + GetData.studentNumber + "'";
 
         try (
                 Connection connect = DatabaseHandler.connectDB();
@@ -686,6 +689,72 @@ public class DashboardController implements Initializable {
         studentNumberLabel.setText(GetData.studentNumber);
     }
 
+    public void insertImage () {
+
+        FileChooser open = new FileChooser();
+        open.setTitle("Image File");
+        open.getExtensionFilters().add(new FileChooser.ExtensionFilter("Image File", "*png", "*jpg", "*jpeg"));
+        Stage stage = (Stage) navForm.getScene().getWindow();
+        File file = open.showOpenDialog(stage);
+
+        if (file != null) {
+            image = new Image(file.toURI().toString(), 100, 63, false, true);
+            circleImage.setFill(new ImagePattern(image));
+            smallCircle_image.setFill(new ImagePattern(image));
+
+            GetData.path = file.getAbsolutePath();
+            changeProfile();
+        }
+
+    }
+
+    public void changeProfile () {
+
+        String uri = GetData.path;
+        uri = uri.replace("//", "////");
+
+        String sql = "UPDATE students SET image = '" + uri + "' WHERE studentNumber = '" + GetData.studentNumber + "'";
+
+        try (
+                Connection connect = DatabaseHandler.connectDB();
+                Statement stmt = connect.createStatement()
+                ) {
+
+            stmt.executeUpdate(sql);
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    public void showProfile () {
+        if (GetData.path == null || GetData.path.isBlank() || "null".equalsIgnoreCase(GetData.path)) return;
+        String uri = "file:" + GetData.path;
+        image = new Image(uri, 100, 63, false, true);
+        circleImage.setFill(new ImagePattern(image));
+        smallCircle_image.setFill(new ImagePattern(image));
+    }
+
+    public void designInsertImage () {
+        editBtn.setVisible(false);
+
+        circleImage.setOnMouseEntered((MouseEvent e) -> {
+            editBtn.setVisible(true);
+        });
+        circleImage.setOnMouseExited((MouseEvent e) -> {
+            editBtn.setVisible(false);
+        });
+        editBtn.setOnMouseEntered((MouseEvent e) -> {
+            editBtn.setVisible(true);
+        });
+        editBtn.setOnMouseExited((MouseEvent e) -> {
+            editBtn.setVisible(false);
+        });
+        editBtn.setOnMousePressed((MouseEvent e) -> {
+            editBtn.setVisible(true);
+        });
+    }
+
     private ObservableList<availableBook> booksList;
     public void showAvailableBooks () {
 
@@ -794,6 +863,8 @@ public class DashboardController implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
+        showProfile();
+        designInsertImage();
         showAvailableBooks();
         setStudentNumberLabel();
         displayDate();
