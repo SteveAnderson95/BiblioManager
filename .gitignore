@@ -4,6 +4,18 @@ target/
 !**/src/test/**/target/
 .kotlin
 
+### Runtime / local data ###
+*.log
+hs_err_pid*
+replay_pid*
+*.db
+*.sqlite
+*.sqlite3
+*.mv.db
+*.trace.db
+.env
+.env.*
+
 ### IntelliJ IDEA ###
 .idea/
 .idea/modules.xml
