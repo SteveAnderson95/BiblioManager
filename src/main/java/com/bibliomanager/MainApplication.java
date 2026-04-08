@@ -1,6 +1,8 @@
 package com.bibliomanager;
 
 import javafx.application.Application;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.layout.HBox;
 import javafx.stage.Stage;
@@ -11,9 +13,13 @@ public class MainApplication extends Application {
 
     @Override
     public void start(Stage stage) throws IOException {
-        HBox hBox = new HBox();
-        Scene scene = new Scene(hBox);
+
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/bibliomanager/fxml/login-view.fxml"));
+        Scene scene = new Scene(loader.load(), 1000, 500);
         stage.setScene(scene);
+        stage.setResizable(false);
+        stage.setTitle("BiblioManager - Login");
+        stage.centerOnScreen();
         stage.show();
     }
 }

@@ -1,14 +1,71 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import java.lang.*?>
-<?import java.util.*?>
-<?import javafx.scene.*?>
-<?import javafx.scene.control.*?>
-<?import javafx.scene.layout.*?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.PasswordField?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
 
-<AnchorPane xmlns="http://javafx.com/javafx"
-            xmlns:fx="http://javafx.com/fxml"
-            fx:controller="CONTROLLER_NAME"
-            prefHeight="400.0" prefWidth="600.0">
-
-</AnchorPane>
+<HBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="500.0" prefWidth="1000.0" stylesheets="@../css/login.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.bibliomanager.controller.LoginController">
+   <children>
+      <VBox alignment="CENTER_LEFT" prefHeight="500.0" prefWidth="500.0" styleClass="left-panel">
+         <children>
+            <Text fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="left-title-text" text="Biblio">
+               <font>
+                  <Font name="System Bold" size="40.0" />
+               </font>
+            </Text>
+            <Text fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="left-title-text" text="Manager">
+               <font>
+                  <Font name="System Bold" size="40.0" />
+               </font>
+            </Text>
+            <Text strokeType="OUTSIDE" strokeWidth="0.0" styleClass="left-slogan-text" text="Organize your library with ease">
+               <font>
+                  <Font size="17.0" />
+               </font>
+            </Text>
+         </children>
+         <padding>
+            <Insets left="50.0" />
+         </padding>
+      </VBox>
+      <VBox alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="500.0" prefWidth="500.0" spacing="20.0" styleClass="right-panel">
+         <children>
+            <Text fill="#1e3a8a" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="title-label" text="Welcome Back">
+               <font>
+                  <Font size="20.0" />
+               </font>
+            </Text>
+            <VBox>
+               <children>
+                  <Label text="Username" textFill="#1e3a8a" />
+                  <TextField fx:id="usernameField" promptText="Enter your pseudo" />
+               </children>
+            </VBox>
+            <VBox layoutX="10.0" layoutY="28.0">
+               <children>
+                  <Label text="Password" textFill="#1e3a8a" />
+                  <PasswordField fx:id="passwordField" promptText="••••••••" styleClass="te" />
+               </children>
+            </VBox>
+            <Button defaultButton="true" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#handleLogin" styleClass="login-button" text="Login" textFill="WHITE">
+               <font>
+                  <Font name="System Bold" size="13.0" />
+               </font>
+            </Button>
+            <Label fx:id="errorLabel" styleClass="error-text" />
+         </children>
+         <padding>
+            <Insets bottom="60.0" left="60.0" right="60.0" top="60.0" />
+         </padding>
+         <HBox.margin>
+            <Insets />
+         </HBox.margin>
+      </VBox>
+   </children>
+</HBox>
