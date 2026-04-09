@@ -66,7 +66,7 @@ public class LoginController {
             Scene scene = new Scene(root);
             stage.setScene(scene);
             stage.setTitle("BiblioManager");
-            stage.centerOnScreen();
+            stage.setResizable(true);
             stage.show();
 
         } catch (IOException e) {
