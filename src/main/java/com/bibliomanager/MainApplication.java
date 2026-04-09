@@ -15,7 +15,7 @@ public class MainApplication extends Application {
     public void start(Stage stage) throws IOException {
 
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/bibliomanager/fxml/login-view.fxml"));
-        Scene scene = new Scene(loader.load(), 1000, 500);
+        Scene scene = new Scene(loader.load());
         stage.setScene(scene);
         stage.setResizable(false);
         stage.setTitle("BiblioManager - Login");

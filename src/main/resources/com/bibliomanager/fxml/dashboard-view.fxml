@@ -1,31 +1,25 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.geometry.Insets?>
-<?import javafx.scene.control.Button?>
-<?import javafx.scene.control.Label?>
-<?import javafx.scene.image.Image?>
-<?import javafx.scene.image.ImageView?>
-<?import javafx.scene.layout.BorderPane?>
-<?import javafx.scene.layout.HBox?>
-<?import javafx.scene.layout.Region?>
-<?import javafx.scene.layout.StackPane?>
-<?import javafx.scene.layout.VBox?>
-<?import javafx.scene.shape.Circle?>
-<?import javafx.scene.text.Font?>
+<?import javafx.geometry.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.image.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.shape.*?>
+<?import javafx.scene.text.*?>
 
-<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="750.0" prefWidth="1200.0" stylesheets="@../css/dashboard.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1">
+<BorderPane fx:id="mainContainer" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="750.0" prefWidth="1200.0" stylesheets="@../css/dashboard.css" xmlns="http://javafx.com/javafx/17.0.12" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.bibliomanager.controller.DashboardController">
    <left>
       <VBox fx:id="sidebar" alignment="CENTER" prefWidth="250.0" styleClass="sidebar" stylesheets="@../css/dashboard.css">
          <children>
             <VBox alignment="CENTER_LEFT" prefHeight="533.0" prefWidth="250.0" styleClass="nav-container">
                <children>
-                  <HBox alignment="CENTER_LEFT" prefHeight="60.0" prefWidth="250.0" styleClass="nav-item">
+                  <HBox fx:id="btnDashboard" alignment="CENTER_LEFT" prefHeight="60.0" prefWidth="250.0" styleClass="nav-item">
                      <children>
                         <ImageView fitHeight="30.0" fitWidth="37.0" pickOnBounds="true" preserveRatio="true">
                            <image>
                               <Image url="@../icons/dashboardWhite.png" />
                            </image></ImageView>
-                        <Button mnemonicParsing="false" styleClass="nav-button" text="Dashboard" textFill="WHITE">
+                        <Button mnemonicParsing="false" onAction="#showDashboardView" styleClass="nav-button" text="Dashboard" textFill="WHITE">
                            <font>
                               <Font name="System Bold" size="20.0" />
                            </font></Button>
@@ -34,14 +28,14 @@
                         <Insets left="20.0" />
                      </padding>
                   </HBox>
-                  <HBox alignment="CENTER_LEFT" prefHeight="60.0" prefWidth="250.0" styleClass="nav-item">
+                  <HBox fx:id="btnBooks" alignment="CENTER_LEFT" prefHeight="60.0" prefWidth="250.0" styleClass="nav-item">
                      <children>
                         <ImageView fitHeight="30.0" fitWidth="37.0" pickOnBounds="true" preserveRatio="true">
                            <image>
                               <Image url="@../icons/booksWhite.png" />
                            </image>
                         </ImageView>
-                        <Button mnemonicParsing="false" styleClass="nav-button" text="Books" textFill="WHITE">
+                        <Button mnemonicParsing="false" onAction="#showBooksView" styleClass="nav-button" text="Books" textFill="WHITE">
                            <font>
                               <Font name="System Bold" size="20.0" />
                            </font>
@@ -51,14 +45,14 @@
                         <Insets left="20.0" />
                      </padding>
                   </HBox>
-                  <HBox alignment="CENTER_LEFT" prefHeight="60.0" prefWidth="250.0" styleClass="nav-item">
+                  <HBox fx:id="btnStudents" alignment="CENTER_LEFT" prefHeight="60.0" prefWidth="250.0" styleClass="nav-item">
                      <children>
                         <ImageView fitHeight="30.0" fitWidth="37.0" pickOnBounds="true" preserveRatio="true">
                            <image>
                               <Image url="@../icons/userWhite.png" />
                            </image>
                         </ImageView>
-                        <Button mnemonicParsing="false" styleClass="nav-button" text="Students" textFill="WHITE">
+                        <Button mnemonicParsing="false" onAction="#showStudentsView" styleClass="nav-button" text="Students" textFill="WHITE">
                            <font>
                               <Font name="System Bold" size="20.0" />
                            </font>
@@ -68,14 +62,14 @@
                         <Insets left="20.0" />
                      </padding>
                   </HBox>
-                  <HBox alignment="CENTER_LEFT" prefHeight="60.0" prefWidth="250.0" styleClass="nav-item">
+                  <HBox fx:id="btnBorrows" alignment="CENTER_LEFT" prefHeight="60.0" prefWidth="250.0" styleClass="nav-item">
                      <children>
                         <ImageView fitHeight="30.0" fitWidth="37.0" pickOnBounds="true" preserveRatio="true">
                            <image>
                               <Image url="@../icons/borrowWhite.png" />
                            </image>
                         </ImageView>
-                        <Button mnemonicParsing="false" styleClass="nav-button" text="Borrows" textFill="WHITE">
+                        <Button mnemonicParsing="false" onAction="#showBorrowsView" styleClass="nav-button" text="Borrows" textFill="WHITE">
                            <font>
                               <Font name="System Bold" size="20.0" />
                            </font>
@@ -85,14 +79,14 @@
                         <Insets left="20.0" />
                      </padding>
                   </HBox>
-                  <HBox alignment="CENTER_LEFT" prefHeight="60.0" prefWidth="250.0" styleClass="nav-item">
+                  <HBox fx:id="btnReturns" alignment="CENTER_LEFT" prefHeight="60.0" prefWidth="250.0" styleClass="nav-item">
                      <children>
                         <ImageView fitHeight="30.0" fitWidth="37.0" pickOnBounds="true" preserveRatio="true">
                            <image>
                               <Image url="@../icons/returnWhite.png" />
                            </image>
                         </ImageView>
-                        <Button mnemonicParsing="false" styleClass="nav-button" text="Returns" textFill="WHITE">
+                        <Button mnemonicParsing="false" onAction="#showReturnsView" styleClass="nav-button" text="Returns" textFill="WHITE">
                            <font>
                               <Font name="System Bold" size="20.0" />
                            </font>
@@ -102,14 +96,14 @@
                         <Insets left="20.0" />
                      </padding>
                   </HBox>
-                  <HBox alignment="CENTER_LEFT" prefHeight="60.0" prefWidth="250.0" styleClass="nav-item">
+                  <HBox fx:id="btnHistory" alignment="CENTER_LEFT" prefHeight="60.0" prefWidth="250.0" styleClass="nav-item">
                      <children>
                         <ImageView fitHeight="30.0" fitWidth="37.0" pickOnBounds="true" preserveRatio="true">
                            <image>
                               <Image url="@../icons/historyWhite.png" />
                            </image>
                         </ImageView>
-                        <Button mnemonicParsing="false" styleClass="nav-button" text="History" textFill="WHITE">
+                        <Button mnemonicParsing="false" onAction="#showHistoryView" styleClass="nav-button" text="History" textFill="WHITE">
                            <font>
                               <Font name="System Bold" size="20.0" />
                            </font>
@@ -119,14 +113,14 @@
                         <Insets left="20.0" />
                      </padding>
                   </HBox>
-                  <HBox alignment="CENTER_LEFT" prefHeight="60.0" prefWidth="250.0" styleClass="nav-item">
+                  <HBox fx:id="btnSettings" alignment="CENTER_LEFT" prefHeight="60.0" prefWidth="250.0" styleClass="nav-item">
                      <children>
                         <ImageView fitHeight="30.0" fitWidth="37.0" pickOnBounds="true" preserveRatio="true">
                            <image>
                               <Image url="@../icons/settingsWhite.png" />
                            </image>
                         </ImageView>
-                        <Button mnemonicParsing="false" styleClass="nav-button" text="Settings" textFill="WHITE">
+                        <Button mnemonicParsing="false" onAction="#showSettingsView" styleClass="nav-button" text="Settings" textFill="WHITE">
                            <font>
                               <Font name="System Bold" size="20.0" />
                            </font>
@@ -143,14 +137,14 @@
             </VBox>
             <VBox alignment="CENTER" prefWidth="250.0">
                <children>
-                  <HBox alignment="CENTER" prefHeight="60.0" prefWidth="163.0" styleClass="logout-container" stylesheets="@../css/dashboard.css">
+                  <HBox fx:id="btnLogout" alignment="CENTER" prefHeight="60.0" prefWidth="163.0" styleClass="logout-container" stylesheets="@../css/dashboard.css">
                      <children>
                         <ImageView fitHeight="25.0" fitWidth="25.0" pickOnBounds="true" preserveRatio="true">
                            <image>
                               <Image url="@../icons/logoutRed.png" />
                            </image>
                         </ImageView>
-                        <Button mnemonicParsing="false" styleClass="nav-button" text="Logout" textFill="#ff6b6b">
+                        <Button mnemonicParsing="false" onAction="#handleLogout" styleClass="nav-button" text="Logout" textFill="#ff6b6b">
                            <font>
                               <Font name="System Bold" size="16.0" />
                            </font>
@@ -199,12 +193,12 @@
             </VBox>
             <VBox alignment="CENTER_LEFT" prefHeight="200.0">
                <children>
-                  <Label text="Dashboard" textFill="WHITE">
+                  <Label fx:id="viewTitleLabel" text="Dashboard" textFill="WHITE">
                      <font>
-                        <Font name="Noto Sans Display Regular" size="35.0" />
+                        <Font name="System Bold" size="35.0" />
                      </font>
                   </Label>
-                  <Label alignment="CENTER" prefHeight="25.0" prefWidth="153.0" styleClass="date-label" text="Jeudi 9 Avril 2026" textFill="WHITE">
+                  <Label fx:id="dateLabel" alignment="CENTER" prefHeight="25.0" prefWidth="153.0" styleClass="date-label" text="Jeudi 9 Avril 2026" textFill="WHITE">
                      <font>
                         <Font size="15.0" />
                      </font>
@@ -214,15 +208,15 @@
                   <Insets left="50.0" />
                </padding>
             </VBox>
-            <Region prefHeight="200.0" prefWidth="200.0" HBox.hgrow="ALWAYS" />
-            <VBox alignment="CENTER" prefHeight="82.0" prefWidth="250.0">
+            <Region prefHeight="100.0" prefWidth="464.0" HBox.hgrow="ALWAYS" />
+            <VBox alignment="CENTER" prefHeight="82.0" prefWidth="300.0">
                <children>
                   <HBox alignment="CENTER_LEFT" prefHeight="100.0" prefWidth="200.0">
                      <children>
                         <StackPane>
                            <children>
                               <Circle fill="#333537" radius="31.0" stroke="WHITE" strokeType="INSIDE" strokeWidth="2.0" />
-                              <Label text="SA" textFill="WHITE">
+                              <Label fx:id="avatarLabel" text="SA" textFill="WHITE">
                                  <font>
                                     <Font name="System Bold" size="26.0" />
                                  </font>
@@ -231,13 +225,13 @@
                         </StackPane>
                         <VBox alignment="CENTER_LEFT">
                            <children>
-                              <Label text="Steve Anderson" textFill="WHITE">
+                              <Label fx:id="userNameLabel" text="Steve Anderson" textFill="WHITE">
                                  <font>
-                                    <Font name="Liberation Serif Bold" size="21.0" />
+                                    <Font name="Liberation Serif Bold" size="25.0" />
                                  </font></Label>
-                              <Label text="Steve25" textFill="WHITE">
+                              <Label fx:id="userLoginLabel" text="Steve25" textFill="WHITE">
                                  <font>
-                                    <Font name="Liberation Serif" size="17.0" />
+                                    <Font name="Liberation Serif" size="21.0" />
                                  </font></Label>
                            </children>
                            <padding>
@@ -250,6 +244,9 @@
                <padding>
                   <Insets left="10.0" />
                </padding>
+               <HBox.margin>
+                  <Insets />
+               </HBox.margin>
             </VBox>
          </children>
       </HBox>
