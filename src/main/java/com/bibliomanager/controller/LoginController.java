@@ -63,11 +63,15 @@ public class LoginController {
         try {
             Parent root = FXMLLoader.load(getClass().getResource("/com/bibliomanager/fxml/dashboard-view.fxml"));
             Stage stage = (Stage) errorLabel.getScene().getWindow();
+            stage.setResizable(true);
             Scene scene = new Scene(root);
             stage.setScene(scene);
             stage.setTitle("BiblioManager");
-            stage.setResizable(true);
             stage.show();
+
+            javafx.application.Platform.runLater(() -> {
+                stage.setMaximized(true);
+            });
 
         } catch (IOException e) {
             errorLabel.setText("Dashboard loading error.");
