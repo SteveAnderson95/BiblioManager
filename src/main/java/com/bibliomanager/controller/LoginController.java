@@ -18,10 +18,8 @@ public class LoginController {
 
     @FXML
     private Label errorLabel;
-
     @FXML
     private PasswordField passwordField;
-
     @FXML
     private TextField usernameField;
 
