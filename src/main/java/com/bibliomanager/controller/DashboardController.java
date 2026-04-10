@@ -3,6 +3,7 @@ package com.bibliomanager.controller;
 import com.bibliomanager.UserSession;
 import com.bibliomanager.model.Librarian;
 import com.bibliomanager.service.AuthService;
+import com.bibliomanager.utils.DateUtils;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -60,6 +61,7 @@ public class DashboardController {
             String initials = user.getFirstName().substring(0, 1).toUpperCase() +
                     user.getLastName().substring(0, 1).toUpperCase();
             avatarLabel.setText(initials);
+            dateLabel.setText(DateUtils.getFormattedDate());
         }
     }
 
@@ -67,7 +69,7 @@ public class DashboardController {
     public void showDashboardView() {
         viewTitleLabel.setText("Dashboard");
         setActiveBtn(btnDashboard);
-        loadView("dashboard-view.fxml");
+        loadView("home-view.fxml");
     }
 
     @FXML
