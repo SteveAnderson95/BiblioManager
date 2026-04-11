@@ -1,0 +1,99 @@
+.main-container {
+    -fx-background-color: #F0F0ED;
+    -fx-padding: 20;
+    -fx-min-height: 100%;
+}
+.div-container {
+    -fx-background-color: #fff;
+    -fx-padding: 10 0;
+}
+.card-title {
+    -fx-background-color: #1E1F20;
+}
+.card1 {
+    -fx-background-color: #f25f29;
+}
+.card2 {
+    -fx-background-color: #1f92de;
+}
+.card3 {
+    -fx-background-color: #1fa162;
+}
+.card4 {
+    -fx-background-color: #ff6b6b;
+}
+.card:hover {
+    -fx-translate-y: -5;
+    -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.4), 15, 0, 0, 8);
+    -fx-cursor: hand;
+}
+.table-view {
+    -fx-background-color: white;
+    -fx-border-color: #e0e0e0;
+}
+.table-view .column-header-background {
+    -fx-background-color: #f25f29;
+}
+.table-view .column-header {
+    -fx-background-color: transparent;
+    -fx-border-color: rgba(255,255,255,0.3);
+    -fx-border-width: 0 1 0 0;
+}
+.table-view .column-header .label {
+    -fx-text-fill: white;
+    -fx-font-weight: bold;
+    -fx-alignment: CENTER;
+}
+.table-view .table-cell {
+    -fx-text-fill: #333333;
+    -fx-alignment: CENTER;
+    -fx-padding: 10;
+}
+.table-row-cell:odd { -fx-background-color: #ffffff; }
+.table-row-cell:even { -fx-background-color: #f9f9f9; }
+.table-row-cell:hover { -fx-background-color: #f1f4f9; }
+.overdue-table .column-header-background {
+    -fx-background-color: #1E1F20;
+}
+.late-days-cell {
+    -fx-text-fill: #ff6b6b !important;
+    -fx-font-weight: bold;
+}
+/* Supprimer le fond blanc par défaut du graphique */
+.chart-pie-background {
+    -fx-background-color: transparent;
+}
+/* Couleurs des parts basées sur ton dashboard */
+.default-color0.chart-pie { -fx-pie-color: #f25f29; } /* Orange */
+.default-color1.chart-pie { -fx-pie-color: #1f92de; } /* Bleu */
+.default-color2.chart-pie { -fx-pie-color: #1fa162; } /* Vert */
+.default-color3.chart-pie { -fx-pie-color: #ff6b6b; } /* Rouge */
+
+.chart-pie-label {
+    -fx-fill: #333333; /* Labels sombres pour fond blanc */
+    -fx-font-size: 11px;
+}
+.chart-pie-label-line {
+    -fx-stroke: #888888;
+    -fx-stroke-width: 1px;
+}
+/* --- BAR CHART (Nettoyage background) --- */
+.chart {
+    -fx-background-color: transparent;
+}
+
+.chart-plot-background {
+    -fx-background-color: transparent;
+}
+
+.chart-vertical-grid-lines, .chart-horizontal-grid-lines {
+    -fx-stroke: #e0e0e0; /* Lignes de grille très discrètes */
+}
+
+.axis {
+    -fx-tick-label-fill: #777777;
+}
+
+.default-color0.chart-bar {
+    -fx-bar-fill: #f25f29; /* Barres oranges pour matcher */
+}
