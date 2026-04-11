@@ -1,0 +1,378 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.String?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.chart.BarChart?>
+<?import javafx.scene.chart.CategoryAxis?>
+<?import javafx.scene.chart.NumberAxis?>
+<?import javafx.scene.chart.PieChart?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+
+<ScrollPane fitToHeight="true" fitToWidth="true" prefHeight="650.0" prefWidth="950.0" stylesheets="@../css/home.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.bibliomanager.controller.HomeController">
+   <content>
+      <VBox spacing="15.0" styleClass="main-container">
+         <children>
+            <VBox spacing="10.0" styleClass="div-container">
+               <children>
+                  <HBox spacing="15.0">
+                     <children>
+                        <ImageView fitHeight="25.0" fitWidth="26.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../icons/statistics.png" />
+                           </image>
+                        </ImageView>
+                        <Label text="Statistics">
+                           <font>
+                              <Font name="System Bold" size="20.0" />
+                           </font>
+                        </Label>
+                     </children>
+                     <VBox.margin>
+                        <Insets left="20.0" />
+                     </VBox.margin>
+                     <padding>
+                        <Insets left="10.0" />
+                     </padding>
+                  </HBox>
+                  <HBox alignment="CENTER" prefHeight="136.0" prefWidth="908.0" spacing="50.0">
+                     <children>
+                        <VBox alignment="CENTER" prefHeight="126.0" prefWidth="163.0" spacing="12.0" HBox.hgrow="ALWAYS">
+                           <children>
+                              <HBox alignment="CENTER" prefHeight="42.0" prefWidth="163.0" styleClass="card-title">
+                                 <children>
+                                    <Label text="Total Books" textFill="WHITE">
+                                       <font>
+                                          <Font name="System Bold" size="16.0" />
+                                       </font>
+                                    </Label>
+                                 </children>
+                              </HBox>
+                              <HBox alignment="CENTER" spacing="15.0">
+                                 <children>
+                                    <ImageView fitHeight="39.0" fitWidth="42.0" pickOnBounds="true" preserveRatio="true">
+                                       <image>
+                                          <Image url="@../icons/booksWhite.png" />
+                                       </image>
+                                    </ImageView>
+                                    <Label fx:id="totalBooksLabel" text="560" textFill="WHITE">
+                                       <font>
+                                          <Font size="30.0" />
+                                       </font>
+                                    </Label>
+                                 </children>
+                              </HBox>
+                              <HBox alignment="CENTER" spacing="15.0">
+                                 <children>
+                                    <Label fx:id="totalCategoriesLabel" text="5" textFill="WHITE">
+                                       <font>
+                                          <Font size="20.0" />
+                                       </font>
+                                    </Label>
+                                    <Label text="Categories" textFill="WHITE">
+                                       <font>
+                                          <Font size="20.0" />
+                                       </font>
+                                    </Label>
+                                 </children>
+                                 <VBox.margin>
+                                    <Insets bottom="5.0" />
+                                 </VBox.margin>
+                              </HBox>
+                           </children>
+                           <styleClass>
+                              <String fx:value="card1" />
+                              <String fx:value="card" />
+                           </styleClass>
+                        </VBox>
+                        <VBox alignment="CENTER" prefHeight="126.0" prefWidth="163.0" spacing="12.0" HBox.hgrow="ALWAYS">
+                           <children>
+                              <HBox alignment="CENTER" prefHeight="42.0" prefWidth="163.0" styleClass="card-title">
+                                 <children>
+                                    <Label text="Available" textFill="WHITE">
+                                       <font>
+                                          <Font name="System Bold" size="16.0" />
+                                       </font>
+                                    </Label>
+                                 </children>
+                              </HBox>
+                              <HBox alignment="CENTER" spacing="15.0">
+                                 <children>
+                                    <ImageView fitHeight="39.0" fitWidth="42.0" pickOnBounds="true" preserveRatio="true">
+                                       <image>
+                                          <Image url="@../icons/available.png" />
+                                       </image>
+                                    </ImageView>
+                                    <Label fx:id="availableBooksLabel" text="350" textFill="WHITE">
+                                       <font>
+                                          <Font size="30.0" />
+                                       </font>
+                                    </Label>
+                                 </children>
+                              </HBox>
+                              <HBox alignment="CENTER" spacing="10.0">
+                                 <children>
+                                    <Label fx:id="availablePercentageLabel" text="65%" textFill="WHITE">
+                                       <font>
+                                          <Font size="20.0" />
+                                       </font>
+                                    </Label>
+                                    <Label text="of stock" textFill="WHITE">
+                                       <font>
+                                          <Font size="20.0" />
+                                       </font>
+                                    </Label>
+                                 </children>
+                                 <VBox.margin>
+                                    <Insets bottom="5.0" />
+                                 </VBox.margin>
+                              </HBox>
+                           </children>
+                           <styleClass>
+                              <String fx:value="card2" />
+                              <String fx:value="card" />
+                           </styleClass>
+                        </VBox>
+                        <VBox alignment="CENTER" prefHeight="126.0" prefWidth="163.0" spacing="12.0" HBox.hgrow="ALWAYS">
+                           <children>
+                              <HBox alignment="CENTER" prefHeight="42.0" prefWidth="163.0" styleClass="card-title">
+                                 <children>
+                                    <Label text="Active Loans" textFill="WHITE">
+                                       <font>
+                                          <Font name="System Bold" size="16.0" />
+                                       </font>
+                                    </Label>
+                                 </children>
+                              </HBox>
+                              <HBox alignment="CENTER" spacing="15.0">
+                                 <children>
+                                    <ImageView fitHeight="39.0" fitWidth="42.0" pickOnBounds="true" preserveRatio="true">
+                                       <image>
+                                          <Image url="@../icons/borrowWhite.png" />
+                                       </image>
+                                    </ImageView>
+                                    <Label fx:id="activeLoansLabel" text="125" textFill="WHITE">
+                                       <font>
+                                          <Font size="30.0" />
+                                       </font>
+                                    </Label>
+                                 </children>
+                              </HBox>
+                              <HBox alignment="CENTER" spacing="15.0">
+                                 <children>
+                                    <Label text="This month" textFill="WHITE">
+                                       <font>
+                                          <Font size="20.0" />
+                                       </font>
+                                    </Label>
+                                 </children>
+                                 <VBox.margin>
+                                    <Insets bottom="5.0" />
+                                 </VBox.margin>
+                              </HBox>
+                           </children>
+                           <styleClass>
+                              <String fx:value="card3" />
+                              <String fx:value="card" />
+                           </styleClass>
+                        </VBox>
+                        <VBox alignment="CENTER" prefHeight="126.0" prefWidth="163.0" spacing="12.0" HBox.hgrow="ALWAYS">
+                           <children>
+                              <HBox alignment="CENTER" prefHeight="42.0" prefWidth="163.0" styleClass="card-title">
+                                 <children>
+                                    <Label text="Overdue" textFill="WHITE">
+                                       <font>
+                                          <Font name="System Bold" size="16.0" />
+                                       </font>
+                                    </Label>
+                                 </children>
+                              </HBox>
+                              <HBox alignment="CENTER" spacing="15.0">
+                                 <children>
+                                    <ImageView fitHeight="39.0" fitWidth="42.0" pickOnBounds="true" preserveRatio="true">
+                                       <image>
+                                          <Image url="@../icons/returnWhite.png" />
+                                       </image>
+                                    </ImageView>
+                                    <Label fx:id="overdueLabel" text="23" textFill="WHITE">
+                                       <font>
+                                          <Font size="30.0" />
+                                       </font>
+                                    </Label>
+                                 </children>
+                              </HBox>
+                              <HBox alignment="CENTER" spacing="15.0">
+                                 <children>
+                                    <Label text="To follow up" textFill="WHITE">
+                                       <font>
+                                          <Font size="20.0" />
+                                       </font>
+                                    </Label>
+                                 </children>
+                                 <VBox.margin>
+                                    <Insets bottom="5.0" />
+                                 </VBox.margin>
+                              </HBox>
+                           </children>
+                           <styleClass>
+                              <String fx:value="card4" />
+                              <String fx:value="card" />
+                           </styleClass>
+                        </VBox>
+                     </children>
+                     <padding>
+                        <Insets left="20.0" right="20.0" />
+                     </padding>
+                  </HBox>
+               </children>
+            </VBox>
+            <HBox spacing="20.0" VBox.vgrow="ALWAYS">
+               <children>
+                  <VBox spacing="10.0" styleClass="div-container" HBox.hgrow="ALWAYS">
+                     <children>
+                        <HBox spacing="15.0">
+                           <children>
+                              <ImageView fitHeight="25.0" fitWidth="26.0" pickOnBounds="true" preserveRatio="true">
+                                 <image>
+                                    <Image url="@../icons/recent.png" />
+                                 </image>
+                              </ImageView>
+                              <Label text="Recent borrowings">
+                                 <font>
+                                    <Font name="System Bold" size="20.0" />
+                                 </font>
+                              </Label>
+                           </children>
+                           <padding>
+                              <Insets left="10.0" />
+                           </padding>
+                           <VBox.margin>
+                              <Insets left="20.0" />
+                           </VBox.margin>
+                        </HBox>
+                        <TableView fx:id="recentBorrowsTable" fixedCellSize="0.0" VBox.vgrow="ALWAYS">
+                          <columns>
+                            <TableColumn fx:id="colRecentStudent" prefWidth="174.0" text="Student" />
+                            <TableColumn fx:id="colRecentBook" prefWidth="193.0" text="Book" />
+                              <TableColumn fx:id="colRecentStatus" prefWidth="135.0" styleClass="status-column" text="Status" />
+                          </columns>
+                           <VBox.margin>
+                              <Insets left="20.0" right="20.0" />
+                           </VBox.margin>
+                           <columnResizePolicy>
+                              <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
+                           </columnResizePolicy>
+                        </TableView>
+                     </children>
+                  </VBox>
+                  <VBox spacing="10.0" styleClass="div-container" HBox.hgrow="ALWAYS">
+                     <children>
+                        <HBox spacing="15.0">
+                           <children>
+                              <ImageView fitHeight="25.0" fitWidth="26.0" pickOnBounds="true" preserveRatio="true">
+                                 <image>
+                                    <Image url="@../icons/trend.png" />
+                                 </image>
+                              </ImageView>
+                              <Label text="Loans per week">
+                                 <font>
+                                    <Font name="System Bold" size="20.0" />
+                                 </font>
+                              </Label>
+                           </children>
+                           <padding>
+                              <Insets left="10.0" />
+                           </padding>
+                           <VBox.margin>
+                              <Insets left="20.0" />
+                           </VBox.margin>
+                        </HBox>
+                        <BarChart fx:id="weeklyBarChart" horizontalGridLinesVisible="false" verticalGridLinesVisible="false" VBox.vgrow="ALWAYS">
+                          <xAxis>
+                            <CategoryAxis side="BOTTOM" />
+                          </xAxis>
+                          <yAxis>
+                            <NumberAxis side="LEFT" />
+                          </yAxis>
+                        </BarChart>
+                     </children>
+                  </VBox>
+               </children>
+            </HBox>
+            <HBox spacing="20.0" VBox.vgrow="ALWAYS">
+               <children>
+                  <VBox spacing="10.0" styleClass="div-container" HBox.hgrow="ALWAYS">
+                     <children>
+                        <HBox spacing="15.0">
+                           <children>
+                              <ImageView fitHeight="25.0" fitWidth="26.0" pickOnBounds="true" preserveRatio="true">
+                                 <image>
+                                    <Image url="@../icons/piechart.png" />
+                                 </image>
+                              </ImageView>
+                              <Label text="Stock by type">
+                                 <font>
+                                    <Font name="System Bold" size="20.0" />
+                                 </font>
+                              </Label>
+                           </children>
+                           <padding>
+                              <Insets left="10.0" />
+                           </padding>
+                           <VBox.margin>
+                              <Insets left="20.0" />
+                           </VBox.margin>
+                        </HBox>
+                        <PieChart fx:id="categoryPieChart" legendSide="RIGHT" prefHeight="200.0" VBox.vgrow="ALWAYS" />
+                     </children>
+                  </VBox>
+                  <VBox spacing="20.0" styleClass="div-container" HBox.hgrow="ALWAYS">
+                     <children>
+                        <HBox spacing="15.0">
+                           <children>
+                              <ImageView fitHeight="25.0" fitWidth="26.0" pickOnBounds="true" preserveRatio="true">
+                                 <image>
+                                    <Image url="@../icons/warning.png" />
+                                 </image>
+                              </ImageView>
+                              <Label text="Overdue Books" textFill="RED">
+                                 <font>
+                                    <Font name="System Bold" size="20.0" />
+                                 </font>
+                              </Label>
+                           </children>
+                           <padding>
+                              <Insets left="10.0" />
+                           </padding>
+                           <VBox.margin>
+                              <Insets left="20.0" />
+                           </VBox.margin>
+                        </HBox>
+                        <TableView fx:id="overdueTable" fixedCellSize="0.0" styleClass="overdue-table" VBox.vgrow="ALWAYS">
+                           <columns>
+                              <TableColumn fx:id="colOverdueStudent" prefWidth="172.0" text="Student" />
+                              <TableColumn fx:id="colOverdueBook" prefWidth="190.0" text="Book" />
+                              <TableColumn fx:id="colOverdueDays" prefWidth="154.0" styleClass="late" text="Overdue Days" />
+                           </columns>
+                           <VBox.margin>
+                              <Insets left="20.0" right="20.0" />
+                           </VBox.margin>
+                           <columnResizePolicy>
+                              <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
+                           </columnResizePolicy>
+                        </TableView>
+                     </children>
+                  </VBox>
+               </children>
+            </HBox>
+         </children>
+      </VBox>
+   </content>
+</ScrollPane>
