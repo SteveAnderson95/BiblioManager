@@ -62,6 +62,7 @@ public class DashboardController {
                     user.getLastName().substring(0, 1).toUpperCase();
             avatarLabel.setText(initials);
             dateLabel.setText(DateUtils.getFormattedDate());
+            showDashboardView();
         }
     }
 
