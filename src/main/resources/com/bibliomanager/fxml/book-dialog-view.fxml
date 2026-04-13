@@ -13,8 +13,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-
-<VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="490.0" prefWidth="683.0" styleClass="dialog-root" stylesheets="@../css/book-dialog.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1">
+<VBox alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="490.0" prefWidth="683.0" styleClass="dialog-root" stylesheets="@../css/book-dialog.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.bibliomanager.controller.BookDialogController">
    <children>
       <HBox alignment="CENTER_LEFT" prefHeight="64.0" prefWidth="683.0" styleClass="dialog-header">
          <children>
@@ -23,7 +22,7 @@
                   <Image url="@../icons/addWhite.png" />
                </image>
             </ImageView>
-            <Label prefHeight="29.0" prefWidth="118.0" styleClass="dialog-header-title" text="Add book" textFill="WHITE" HBox.hgrow="ALWAYS">
+            <Label fx:id="dialogTitle" prefHeight="29.0" prefWidth="118.0" styleClass="dialog-header-title" text="Add book" textFill="WHITE" HBox.hgrow="ALWAYS">
                <font>
                   <Font name="System Bold" size="20.0" />
                </font>
@@ -32,7 +31,7 @@
                </HBox.margin>
             </Label>
             <Region prefHeight="55.0" prefWidth="462.0" />
-            <Button mnemonicParsing="false" styleClass="dialog-close-btn">
+            <Button mnemonicParsing="false" onAction="#handleClose" styleClass="dialog-close-btn">
                <graphic>
                   <ImageView fitHeight="14.0" fitWidth="11.0" pickOnBounds="true" preserveRatio="true">
                      <image>
@@ -52,8 +51,8 @@
                <children>
                   <StackPane prefHeight="175.0" prefWidth="193.0" styleClass="cover-box">
                      <children>
-                        <ImageView fitHeight="202.0" fitWidth="158.0" pickOnBounds="true" preserveRatio="true" />
-                        <VBox alignment="CENTER" prefHeight="200.0" prefWidth="100.0" spacing="10.0" styleClass="cover-col">
+                        <ImageView fx:id="coverPreview" fitHeight="202.0" fitWidth="158.0" pickOnBounds="true" preserveRatio="true" />
+                        <VBox fx:id="coverPlaceholder" alignment="CENTER" onMouseClicked="#handleChooseCover" prefHeight="200.0" prefWidth="100.0" spacing="10.0" styleClass="cover-col">
                            <children>
                               <ImageView fitHeight="47.0" fitWidth="44.0" pickOnBounds="true" preserveRatio="true">
                                  <image>
@@ -69,7 +68,7 @@
                         </VBox>
                      </children>
                   </StackPane>
-                  <Button mnemonicParsing="false" prefHeight="34.0" prefWidth="118.0" styleClass="choose-file-btn" text="Choose file" textFill="WHITE">
+                  <Button mnemonicParsing="false" onAction="#handleChooseCover" prefHeight="34.0" prefWidth="118.0" styleClass="choose-file-btn" text="Choose file" textFill="WHITE">
                      <font>
                         <Font size="16.0" />
                      </font>
@@ -89,7 +88,7 @@
                               <Font name="System Bold" size="14.0" />
                            </font>
                         </Label>
-                        <TextField promptText="Book title" styleClass="form-field">
+                        <TextField fx:id="titleField" promptText="Book title" styleClass="form-field">
                            <font>
                               <Font size="15.0" />
                            </font>
@@ -103,7 +102,7 @@
                               <Font name="System Bold" size="14.0" />
                            </font>
                         </Label>
-                        <TextField promptText="Author name" styleClass="form-field">
+                        <TextField fx:id="authorField" promptText="Author name" styleClass="form-field">
                            <font>
                               <Font size="15.0" />
                            </font>
@@ -117,7 +116,7 @@
                               <Font name="System Bold" size="14.0" />
                            </font>
                         </Label>
-                        <TextField promptText="978-...." styleClass="form-field">
+                        <TextField fx:id="isbnField" promptText="978-...." styleClass="form-field">
                            <font>
                               <Font size="15.0" />
                            </font>
@@ -131,7 +130,7 @@
                               <Font name="System Bold" size="14.0" />
                            </font>
                         </Label>
-                        <ComboBox maxWidth="1.7976931348623157E308" prefHeight="36.0" prefWidth="467.0" promptText="Select category" styleClass="form-combo" />
+                        <ComboBox fx:id="categoryCombo" maxWidth="1.7976931348623157E308" prefHeight="36.0" prefWidth="467.0" promptText="Select category" styleClass="form-combo" />
                      </children>
                   </VBox>
                   <HBox prefHeight="100.0" prefWidth="200.0" spacing="10.0">
@@ -143,7 +142,7 @@
                                     <Font name="System Bold" size="14.0" />
                                  </font>
                               </Label>
-                              <TextField promptText="0" styleClass="form-field">
+                              <TextField fx:id="totalField" promptText="0" styleClass="form-field">
                                  <font>
                                     <Font size="15.0" />
                                  </font>
@@ -157,7 +156,7 @@
                                     <Font name="System Bold" size="14.0" />
                                  </font>
                               </Label>
-                              <TextField promptText="0" styleClass="form-field">
+                              <TextField fx:id="availableField" promptText="0" styleClass="form-field">
                                  <font>
                                     <Font size="15.0" />
                                  </font>
@@ -173,9 +172,14 @@
             <Insets bottom="18.0" left="20.0" right="20.0" top="18.0" />
          </padding>
       </HBox>
-      <HBox alignment="CENTER_RIGHT" prefHeight="58.0" prefWidth="683.0" spacing="10.0" styleClass="dialog-footer">
+      <Label fx:id="errorLabel" prefHeight="21.0" prefWidth="485.0" textFill="#e53935" wrapText="true">
+         <font>
+            <Font size="15.0" />
+         </font>
+      </Label>
+      <HBox alignment="CENTER_RIGHT" prefHeight="54.0" prefWidth="683.0" spacing="10.0" styleClass="dialog-footer">
          <children>
-            <Button mnemonicParsing="false" styleClass="btn-cancel" text="Cancel" textFill="#555555">
+            <Button mnemonicParsing="false" onAction="#handleClose" styleClass="btn-cancel" text="Cancel" textFill="#555555">
                <font>
                   <Font size="15.0" />
                </font>
@@ -186,7 +190,7 @@
                   <Insets bottom="7.0" left="18.0" right="18.0" top="7.0" />
                </padding>
             </Button>
-            <Button mnemonicParsing="false" styleClass="btn-save" text="Save Book" textFill="WHITE">
+            <Button mnemonicParsing="false" onAction="#handleSave" styleClass="btn-save" text="Save Book" textFill="WHITE">
                <font>
                   <Font size="15.0" />
                </font>
