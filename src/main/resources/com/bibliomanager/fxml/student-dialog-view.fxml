@@ -1,0 +1,163 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Region?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+
+<VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="447.0" prefWidth="683.0" styleClass="dialog-root" stylesheets="@../css/book-dialog.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.bibliomanager.controller.StudentDialogController">
+    <children>
+        <HBox alignment="CENTER_LEFT" prefHeight="61.0" prefWidth="683.0" styleClass="dialog-header">
+            <children>
+                <ImageView fitHeight="28.0" fitWidth="35.0" pickOnBounds="true" preserveRatio="true">
+                    <image>
+                        <Image url="@../icons/addUser.png" />
+                    </image>
+                </ImageView>
+                <Label fx:id="dialogTitle" prefHeight="29.0" prefWidth="228.0" styleClass="dialog-header-title" text="Add Student" textFill="WHITE" HBox.hgrow="ALWAYS">
+                    <font>
+                        <Font name="System Bold" size="20.0" />
+                    </font>
+                    <HBox.margin>
+                        <Insets left="15.0" />
+                    </HBox.margin>
+                </Label>
+                <Region prefHeight="55.0" prefWidth="462.0" />
+                <Button mnemonicParsing="false" onAction="#handleClose" styleClass="dialog-close-btn">
+                    <graphic>
+                        <ImageView fitHeight="14.0" fitWidth="11.0" pickOnBounds="true" preserveRatio="true">
+                            <image>
+                                <Image url="@../icons/close.png" />
+                            </image>
+                        </ImageView>
+                    </graphic>
+                </Button>
+            </children>
+            <padding>
+                <Insets bottom="15.0" left="18.0" right="18.0" top="15.0" />
+            </padding>
+        </HBox>
+        <HBox prefHeight="100.0" prefWidth="200.0" spacing="15.0" styleClass="dialog-body">
+            <children>
+                <VBox prefHeight="200.0" prefWidth="100.0" spacing="10.0" styleClass="form-col" HBox.hgrow="ALWAYS">
+                    <children>
+                  <HBox prefHeight="100.0" prefWidth="200.0" spacing="20.0">
+                     <children>
+                              <VBox prefHeight="60.0" prefWidth="100.0" spacing="3.0" styleClass="form-group" HBox.hgrow="ALWAYS">
+                                  <children>
+                                      <Label styleClass="form-label" text="FIRSTNAME">
+                                          <font>
+                                              <Font name="System Bold" size="14.0" />
+                                          </font>
+                                      </Label>
+                                      <TextField fx:id="firstnameField" promptText="First name" styleClass="form-field">
+                                          <font>
+                                              <Font size="15.0" />
+                                          </font>
+                                      </TextField>
+                                  </children>
+                              </VBox>
+                        <VBox prefHeight="60.0" prefWidth="100.0" spacing="3.0" styleClass="form-group" HBox.hgrow="ALWAYS">
+                           <children>
+                              <Label styleClass="form-label" text="LASTNAME">
+                                 <font>
+                                    <Font name="System Bold" size="14.0" />
+                                 </font>
+                              </Label>
+                              <TextField fx:id="lastnameField" promptText="Last name" styleClass="form-field">
+                                 <font>
+                                    <Font size="15.0" />
+                                 </font>
+                              </TextField>
+                           </children>
+                        </VBox>
+                     </children>
+                  </HBox>
+                        <VBox prefWidth="100.0" spacing="3.0" styleClass="form-group">
+                            <children>
+                                <Label styleClass="form-label" text="STUDENT NUMBER">
+                                    <font>
+                                        <Font name="System Bold" size="14.0" />
+                                    </font>
+                                </Label>
+                                <TextField fx:id="numberField" promptText="ex : DUT26-001" styleClass="form-field">
+                                    <font>
+                                        <Font size="15.0" />
+                                    </font>
+                                </TextField>
+                            </children>
+                        </VBox>
+                        <VBox prefWidth="100.0" spacing="3.0" styleClass="form-group">
+                            <children>
+                                <Label styleClass="form-label" text="EMAIL">
+                                    <font>
+                                        <Font name="System Bold" size="14.0" />
+                                    </font>
+                                </Label>
+                                <TextField fx:id="emailField" promptText="steve@edu.uiz.ac.ma" styleClass="form-field">
+                                    <font>
+                                        <Font size="15.0" />
+                                    </font>
+                                </TextField>
+                            </children>
+                        </VBox>
+                        <VBox prefWidth="100.0" spacing="3.0" styleClass="form-group">
+                            <children>
+                                <Label styleClass="form-label" text="CATEGORY">
+                                    <font>
+                                        <Font name="System Bold" size="14.0" />
+                                    </font>
+                                </Label>
+                                <ComboBox fx:id="classCombo" maxWidth="1.7976931348623157E308" prefHeight="36.0" prefWidth="467.0" promptText="Select class" styleClass="form-combo" />
+                            </children>
+                        </VBox>
+                    </children>
+                </VBox>
+            </children>
+            <padding>
+                <Insets bottom="18.0" left="20.0" right="20.0" top="18.0" />
+            </padding>
+        </HBox>
+        <Label fx:id="errorLabel" alignment="CENTER" prefHeight="21.0" prefWidth="693.0" textFill="#e53935" wrapText="true">
+            <font>
+                <Font name="System Bold" size="15.0" />
+            </font>
+        </Label>
+        <HBox alignment="CENTER_RIGHT" prefHeight="54.0" prefWidth="683.0" spacing="10.0" styleClass="dialog-footer">
+            <children>
+                <Button mnemonicParsing="false" onAction="#handleClose" styleClass="btn-cancel" text="Cancel" textFill="#555555">
+                    <font>
+                        <Font size="15.0" />
+                    </font>
+                    <HBox.margin>
+                        <Insets />
+                    </HBox.margin>
+                    <padding>
+                        <Insets bottom="7.0" left="18.0" right="18.0" top="7.0" />
+                    </padding>
+                </Button>
+                <Button mnemonicParsing="false" onAction="#handleSave" styleClass="btn-save" text="Save Student" textFill="WHITE">
+                    <font>
+                        <Font size="15.0" />
+                    </font>
+                    <HBox.margin>
+                        <Insets />
+                    </HBox.margin>
+                    <padding>
+                        <Insets bottom="7.0" left="22.0" right="22.0" top="7.0" />
+                    </padding>
+                </Button>
+            </children>
+            <padding>
+                <Insets bottom="12.0" left="20.0" right="20.0" top="12.0" />
+            </padding>
+        </HBox>
+    </children>
+</VBox>

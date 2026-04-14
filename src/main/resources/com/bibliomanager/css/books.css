@@ -196,3 +196,8 @@
     -fx-min-height: 200;
     -fx-alignment: CENTER;
 }
+
+.loan-container {
+    -fx-background-color: #F0F0ED;
+    -fx-background-radius: 10px;
+}
