@@ -197,9 +197,9 @@
                   </HBox>
                </children>
             </VBox>
-            <VBox alignment="CENTER_LEFT" prefHeight="100.0" prefWidth="277.0">
+            <VBox alignment="CENTER_LEFT" prefHeight="100.0" prefWidth="456.0">
                <children>
-                  <Label fx:id="viewTitleLabel" text="Dashboard" textFill="WHITE">
+                  <Label fx:id="viewTitleLabel" prefHeight="51.0" prefWidth="406.0" text="Dashboard" textFill="WHITE">
                      <font>
                         <Font name="System Bold" size="35.0" />
                      </font>
@@ -214,7 +214,7 @@
                   <Insets left="50.0" />
                </padding>
             </VBox>
-            <Region prefHeight="100.0" prefWidth="370.0" HBox.hgrow="ALWAYS" />
+            <Region prefHeight="100.0" prefWidth="141.0" HBox.hgrow="ALWAYS" />
             <VBox alignment="CENTER" prefHeight="82.0" prefWidth="300.0">
                <children>
                   <HBox alignment="CENTER_LEFT" prefHeight="100.0" prefWidth="200.0">
