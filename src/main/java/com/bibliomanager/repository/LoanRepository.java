@@ -100,6 +100,31 @@ public class LoanRepository {
         return loans;
     }
 
+    public List<Loan> findActiveLoansByStudent(long studentId) throws SQLException {
+        String sql = """
+            SELECT l.id, l.loan_date, l.due_date, l.return_date, l.status,
+                   s.id AS student_id, s.first_name, s.last_name,
+                   b.id AS book_id, b.title
+            FROM loans l
+            JOIN students s ON l.student_id = s.id
+            JOIN books b ON l.book_id = b.id
+            WHERE l.student_id = ?
+              AND l.status IN ('ONGOING', 'OVERDUE')
+            ORDER BY l.due_date ASC
+        """;
+        List<Loan> loans = new ArrayList<>();
+        try (
+                Connection connection = DatabaseManager.getConnection();
+                PreparedStatement ps = connection.prepareStatement(sql)
+                ) {
+            ps.setLong(1, studentId);
+            try (ResultSet rs = ps.executeQuery()) {
+                while (rs.next()) loans.add(mapResultSetToLoan(rs));
+            }
+        }
+        return loans;
+    }
+
     //helper method to transform DB record into a Loan Object
     public Loan mapResultSetToLoan(ResultSet rs) throws SQLException {
         Student student = new Student(rs.getLong("student_id"), null, rs.getString("first_name"), rs.getString("last_name"), "", "");
