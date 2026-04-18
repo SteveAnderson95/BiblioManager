@@ -182,6 +182,35 @@ public class BookRepository {
         }
     }
 
+    //FOR BORROWS VIEW
+    public void decrementAvailability(long bookId) throws SQLException {
+        String sql = """
+            UPDATE books SET available_quantity = available_quantity - 1
+            WHERE id = ? AND available_quantity > 0
+        """;
+        try (
+                Connection connection = DatabaseManager.getConnection();
+                PreparedStatement ps = connection.prepareStatement(sql)
+                ) {
+            ps.setLong(1, bookId);
+            ps.executeUpdate();
+        }
+    }
+
+    public void incrementAvailability(long bookId) throws SQLException {
+        String sql = """
+            UPDATE books SET available_quantity = available_quantity + 1
+            WHERE id = ? AND available_quantity < total_quantity
+        """;
+        try (
+                Connection connection = DatabaseManager.getConnection();
+                PreparedStatement ps = connection.prepareStatement(sql)
+                ) {
+            ps.setLong(1, bookId);
+            ps.executeUpdate();
+        }
+    }
+
     // helper method to transform DB record into a Book Object
     public Book mapResultSetToBook (ResultSet resultSet) throws SQLException {
         Category cat = new Category(
