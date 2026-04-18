@@ -1,16 +1,277 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import java.net.*?>
+<?import javafx.geometry.*?>
 <?import javafx.scene.control.*?>
+<?import javafx.scene.image.*?>
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.*?>
 
-
-<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/17.0.12" xmlns:fx="http://javafx.com/fxml/1">
-   <children>
-      <Label layoutX="206.0" layoutY="162.0" text="Borrows">
-         <font>
-            <Font size="40.0" />
-         </font>
-      </Label>
-   </children>
-</AnchorPane>
+<BorderPane prefHeight="700.0" prefWidth="1000.0" xmlns="http://javafx.com/javafx/17.0.12" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.bibliomanager.controller.LoanController">
+   <top>
+      <HBox prefHeight="55.0" prefWidth="1111.0" styleClass="header-container" BorderPane.alignment="CENTER">
+         <children>
+            <HBox alignment="CENTER_LEFT" prefHeight="55.0" prefWidth="240.0" spacing="10.0" HBox.hgrow="ALWAYS">
+               <children>
+                  <ImageView fitHeight="30.0" fitWidth="33.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../icons/bookBorrow.png" />
+                     </image>
+                  </ImageView>
+                  <Label text="Borrows">
+                     <font>
+                        <Font name="System Bold" size="20.0" />
+                     </font>
+                  </Label>
+                  <Label fx:id="totalBadge" alignment="CENTER" prefHeight="28.0" prefWidth="104.0" styleClass="total-badge" text="12 active" textFill="WHITE">
+                     <font>
+                        <Font size="17.0" />
+                     </font>
+                  </Label>
+               </children>
+               <HBox.margin>
+                  <Insets left="20.0" />
+               </HBox.margin>
+            </HBox>
+         </children>
+      </HBox>
+   </top>
+   <center>
+      <HBox prefHeight="100.0" prefWidth="200.0" BorderPane.alignment="CENTER">
+         <children>
+            <VBox prefHeight="708.0" prefWidth="902.0" spacing="20.0" HBox.hgrow="ALWAYS">
+               <children>
+                  <VBox prefHeight="23.0" prefWidth="770.0" spacing="10.0" styleClass="div-container">
+                     <children>
+                        <HBox alignment="CENTER_LEFT" prefHeight="35.0" prefWidth="862.0" spacing="10.0">
+                           <children>
+                              <ImageView fitHeight="19.0" fitWidth="18.0" pickOnBounds="true" preserveRatio="true">
+                                 <image>
+                                    <Image url="@../icons/addBlack.png" />
+                                 </image>
+                              </ImageView>
+                              <Label text="Register new loan">
+                                 <font>
+                                    <Font name="System Bold" size="18.0" />
+                                 </font>
+                              </Label>
+                           </children>
+                           <VBox.margin>
+                              <Insets />
+                           </VBox.margin>
+                        </HBox>
+                        <HBox alignment="BOTTOM_LEFT" prefHeight="77.0" prefWidth="862.0" spacing="20.0">
+                           <children>
+                              <VBox alignment="CENTER_LEFT" prefHeight="60.0" spacing="5.0" HBox.hgrow="ALWAYS">
+                                 <children>
+                                    <Label text="STUDENT" textFill="#aaaaaa">
+                                       <font>
+                                          <Font name="System Bold" size="13.0" />
+                                       </font>
+                                    </Label>
+                                    <ComboBox fx:id="studentCombo" maxWidth="Infinity" minHeight="37.0" prefHeight="37.0" prefWidth="243.0" promptText="Select student" styleClass="form-field" />
+                                 </children>
+                              </VBox>
+                              <VBox alignment="CENTER_LEFT" prefHeight="60.0" spacing="5.0" HBox.hgrow="ALWAYS">
+                                 <children>
+                                    <Label text="BOOK" textFill="#aaaaaa">
+                                       <font>
+                                          <Font name="System Bold" size="13.0" />
+                                       </font>
+                                    </Label>
+                                    <ComboBox fx:id="bookCombo" maxWidth="Infinity" minHeight="37.0" prefHeight="37.0" prefWidth="240.0" promptText="Select book" styleClass="form-field" />
+                                 </children>
+                              </VBox>
+                              <VBox alignment="CENTER_LEFT" prefHeight="100.0" prefWidth="203.0" spacing="5.0">
+                                 <children>
+                                    <Label text="DUE DATE" textFill="#aaaaaa">
+                                       <font>
+                                          <Font name="System Bold" size="13.0" />
+                                       </font>
+                                    </Label>
+                                    <DatePicker fx:id="dueDatePicker" minHeight="37.0" prefHeight="37.0" prefWidth="188.0" promptText="mm / dd/ yyyy" styleClass="form-combo" />
+                                 </children>
+                              </VBox>
+                              <Button mnemonicParsing="false" onAction="#handleRegister" prefHeight="35.0" prefWidth="143.0" styleClass="add-btn" text="Register" textFill="WHITE">
+                                 <font>
+                                    <Font size="16.0" />
+                                 </font>
+                              </Button>
+                           </children>
+                        </HBox>
+                     </children>
+                     <VBox.margin>
+                        <Insets />
+                     </VBox.margin>
+                     <padding>
+                        <Insets bottom="15.0" left="15.0" right="15.0" top="5.0" />
+                     </padding>
+                  </VBox>
+                  <HBox alignment="CENTER_LEFT" minHeight="60.0" prefHeight="53.0" prefWidth="770.0" spacing="10.0" styleClass="div-container">
+                     <children>
+                        <StackPane alignment="CENTER_LEFT" prefHeight="90.0" prefWidth="252.0">
+                           <children>
+                              <TextField fx:id="searchField" minHeight="37.0" prefHeight="35.0" prefWidth="252.0" promptText="Search student or book">
+                                 <padding>
+                                    <Insets left="40.0" />
+                                 </padding>
+                              </TextField>
+                              <ImageView fitHeight="22.0" fitWidth="36.0" pickOnBounds="true" preserveRatio="true">
+                                 <image>
+                                    <Image url="@../icons/search.png" />
+                                 </image>
+                                 <StackPane.margin>
+                                    <Insets left="10.0" />
+                                 </StackPane.margin>
+                              </ImageView>
+                           </children>
+                        </StackPane>
+                        <ComboBox fx:id="statusFilter" minHeight="37.0" prefHeight="26.0" prefWidth="138.0" promptText="All status" />
+                     </children>
+                     <VBox.margin>
+                        <Insets />
+                     </VBox.margin>
+                     <padding>
+                        <Insets left="15.0" />
+                     </padding>
+                  </HBox>
+                  <TableView fx:id="borrowsTable" prefHeight="458.0" prefWidth="750.0" VBox.vgrow="ALWAYS">
+                     <columns>
+                        <TableColumn fx:id="colStudent" prefWidth="167.0" text="Student" />
+                        <TableColumn fx:id="colBook" prefWidth="178.0" text="Book" />
+                        <TableColumn fx:id="colLoanDate" prefWidth="118.0" text="Loan Date" />
+                        <TableColumn fx:id="colDueDate" prefWidth="133.0" text="Due Date" />
+                        <TableColumn fx:id="colStatus" prefWidth="116.0" text="Status" />
+                        <TableColumn fx:id="colAction" prefWidth="116.0" text="Action" />
+                     </columns>
+                     <columnResizePolicy>
+                        <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
+                     </columnResizePolicy>
+                     <VBox.margin>
+                        <Insets />
+                     </VBox.margin>
+                  </TableView>
+               </children>
+               <padding>
+                  <Insets bottom="15.0" left="15.0" right="15.0" top="15.0" />
+               </padding>
+            </VBox>
+            <VBox minWidth="200.0" prefHeight="708.0" prefWidth="243.0" spacing="10.0" styleClass="div-container">
+               <children>
+                  <VBox prefHeight="70.0" prefWidth="140.0" spacing="5.0" styleClass="borrow-card">
+                     <children>
+                        <Label text="Active loans" textFill="#aaaaaa">
+                           <font>
+                              <Font name="System Bold" size="15.0" />
+                           </font></Label>
+                        <Label fx:id="activeLoansCount" text="10" textFill="LIME">
+                           <font>
+                              <Font name="System Bold" size="21.0" />
+                           </font></Label>
+                     </children>
+                     <VBox.margin>
+                        <Insets left="15.0" right="15.0" />
+                     </VBox.margin>
+                     <padding>
+                        <Insets left="15.0" top="5.0" />
+                     </padding>
+                  </VBox>
+                  <VBox prefHeight="70.0" prefWidth="100.0" spacing="5.0" styleClass="borrow-card">
+                     <children>
+                        <Label text="Overdue" textFill="#aaaaaa">
+                           <font>
+                              <Font name="System Bold" size="15.0" />
+                           </font></Label>
+                        <Label fx:id="overdueCount" text="2" textFill="RED">
+                           <font>
+                              <Font name="System Bold" size="21.0" />
+                           </font></Label>
+                     </children>
+                     <VBox.margin>
+                        <Insets left="15.0" right="15.0" />
+                     </VBox.margin>
+                     <padding>
+                        <Insets left="15.0" top="5.0" />
+                     </padding>
+                  </VBox>
+                  <VBox prefHeight="70.0" prefWidth="100.0" spacing="5.0" styleClass="borrow-card">
+                     <children>
+                        <Label text="Returned Today" textFill="#aaaaaa">
+                           <font>
+                              <Font name="System Bold" size="15.0" />
+                           </font></Label>
+                        <Label fx:id="returnedTodayCount" text="3">
+                           <font>
+                              <Font name="System Bold" size="21.0" />
+                           </font></Label>
+                     </children>
+                     <VBox.margin>
+                        <Insets left="15.0" right="15.0" />
+                     </VBox.margin>
+                     <padding>
+                        <Insets left="15.0" top="5.0" />
+                     </padding>
+                  </VBox>
+                  <VBox prefHeight="346.0" prefWidth="170.0" spacing="5.0" VBox.vgrow="ALWAYS">
+                     <children>
+                        <Label text="Most Overdue" textFill="RED">
+                           <font>
+                              <Font name="System Bold" size="17.0" />
+                           </font>
+                           <VBox.margin>
+                              <Insets left="15.0" />
+                           </VBox.margin></Label>
+                        <VBox fx:id="mostOverdueContainer" prefHeight="200.0" prefWidth="100.0" VBox.vgrow="ALWAYS">
+                           <children>
+                              <HBox alignment="CENTER_LEFT" prefHeight="45.0" prefWidth="181.0">
+                                 <children>
+                                    <VBox alignment="CENTER_LEFT" prefHeight="45.0" prefWidth="175.0">
+                                       <children>
+                                          <Label prefHeight="28.0" prefWidth="164.0" styleClass="info-value" text="Steve Anderson" wrapText="true">
+                                             <VBox.margin>
+                                                <Insets bottom="-8.0" />
+                                             </VBox.margin>
+                                          </Label>
+                                          <Label styleClass="info-label" text="Effective Java" />
+                                       </children>
+                                       <HBox.margin>
+                                          <Insets left="15.0" />
+                                       </HBox.margin>
+                                    </VBox>
+                                    <Label prefHeight="18.0" prefWidth="91.0" text="+4jrs" textFill="RED">
+                                       <font>
+                                          <Font name="System Bold" size="15.0" />
+                                       </font>
+                                    </Label>
+                                 </children>
+                              </HBox>
+                           </children></VBox>
+                        <Label fx:id="noOverdueLabel" alignment="CENTER" prefHeight="24.0" prefWidth="222.0" text="No Overdue" textFill="LIME">
+                           <font>
+                              <Font name="System Bold" size="14.0" />
+                           </font>
+                        </Label>
+                     </children>
+                     <padding>
+                        <Insets top="10.0" />
+                     </padding>
+                     <VBox.margin>
+                        <Insets left="-15.0" right="-15.0" />
+                     </VBox.margin>
+                  </VBox>
+               </children>
+               <padding>
+                  <Insets bottom="15.0" left="15.0" right="15.0" top="15.0" />
+               </padding>
+               <HBox.margin>
+                  <Insets bottom="15.0" right="15.0" top="15.0" />
+               </HBox.margin>
+            </VBox>
+         </children>
+      </HBox>
+   </center>
+   <stylesheets>
+      <URL value="@../css/books.css" />
+      <URL value="@../css/book-dialog.css" />
+   </stylesheets>
+</BorderPane>

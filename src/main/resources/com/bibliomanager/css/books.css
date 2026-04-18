@@ -95,8 +95,6 @@
 .table-view .table-row-cell:selected .table-cell {
     -fx-text-fill: #1E1F20;
 }
-
-/* ── Detail panel ── */
 .detail-panel {
     -fx-background-color: #fff;
     -fx-border-color: #e0e0e0;
@@ -118,8 +116,6 @@
 .close-btn:hover {
     -fx-background-color: rgba(255,255,255,0.3);
 }
-
-/* ── Detail infos ── */
 .info-label {
     -fx-text-fill: #aaaaaa;
     -fx-font-size: 11px;
@@ -131,8 +127,6 @@
     -fx-font-weight: bold;
     -fx-padding: 0 0 8 0;
 }
-
-/* ── Stock cards ── */
 .stock-card {
     -fx-background-color: #f5f6fa;
     -fx-border-color: #e8e8e8;
@@ -152,8 +146,6 @@
     -fx-text-fill: #aaaaaa;
     -fx-font-size: 11px;
 }
-
-/* ── Detail footer buttons ── */
 .detail-footer {
     -fx-padding: 12 16;
     -fx-border-color: #f0f0f0;
@@ -183,11 +175,9 @@
     -fx-max-width: Infinity;
 }
 .btn-delete:hover { -fx-background-color: #fdecea; }
-/* ── Poster image ── */
 .poster-image {
     -fx-background-color: #f0ede8;
 }
-/* Le conteneur autour — ajoute un StackPane dans le FXML */
 .poster-container {
     -fx-background-color: #f5f5f3;
     -fx-border-color: #e8e8e8;
@@ -200,4 +190,16 @@
 .loan-container {
     -fx-background-color: #F0F0ED;
     -fx-background-radius: 10px;
+}
+
+.div-container {
+    -fx-background-color: white;
+    -fx-background-radius: 10;
+}
+.borrow-card {
+    -fx-background-color: #f5f6fa;
+    -fx-border-color: #e8e8e8;
+    -fx-border-radius: 8;
+    -fx-background-radius: 8;
+    -fx-padding: 10 6;
 }
