@@ -11,6 +11,144 @@ import java.util.*;
 
 public class LoanRepository {
 
+    public List<Loan> findActiveLoans() throws SQLException {
+        String sql = """
+            SELECT l.id, l.loan_date, l.due_date, l.return_date, l.status,
+                   s.id AS student_id, s.first_name, s.last_name,
+                   b.id AS book_id, b.title
+            FROM loans l
+            JOIN students s ON l.student_id = s.id
+            JOIN books b ON l.book_id = b.id
+            WHERE l.status IN ('ONGOING', 'OVERDUE')
+            ORDER BY l.due_date ASC
+        """;
+        List<Loan> loans = new ArrayList<>();
+        try (
+                Connection connection = DatabaseManager.getConnection();
+                PreparedStatement ps = connection.prepareStatement(sql);
+                ResultSet rs = ps.executeQuery()
+                ) {
+            while (rs.next()) loans.add(mapResultSetToLoan(rs));
+        }
+        return loans;
+    }
+
+    public List<Loan> searchActiveLoans(String query, String status) throws SQLException {
+        StringBuilder sql = new StringBuilder("""
+            SELECT l.id, l.loan_date, l.due_date, l.return_date, l.status,
+                   s.id AS student_id, s.first_name, s.last_name,
+                   b.id AS book_id, b.title
+            FROM loans l
+            JOIN students s ON l.student_id = s.id
+            JOIN books b ON l.book_id = b.id
+            WHERE l.status IN ('ONGOING', 'OVERDUE')
+        """);
+        List<Object> params = new ArrayList<>();
+
+        if (query != null && !query.isBlank()) {
+            sql.append("""
+                AND (LOWER(s.first_name) LIKE ?
+                  OR LOWER(s.last_name)  LIKE ?
+                  OR LOWER(b.title)      LIKE ?)
+            """);
+            String q = "%" + query.toLowerCase() + "%";
+            params.add(q); params.add(q); params.add(q);
+        }
+        if (status != null && !status.equals("All status")) {
+            sql.append(" AND l.status = ?");
+            params.add(status.toUpperCase());
+        }
+        sql.append(" ORDER BY l.due_date ASC");
+
+        List<Loan> loans = new ArrayList<>();
+        try (
+                Connection connection = DatabaseManager.getConnection();
+                PreparedStatement ps = connection.prepareStatement(sql.toString())
+                ) {
+            for (int i = 0; i < params.size(); i++)
+                ps.setObject(i + 1, params.get(i));
+            try (ResultSet rs = ps.executeQuery()) {
+                while (rs.next()) loans.add(mapResultSetToLoan(rs));
+            }
+        }
+        return loans;
+    }
+
+    public void insert(Loan loan) throws SQLException {
+        String sql = """
+            INSERT INTO loans
+                (student_id, book_id, registered_by,
+                 loan_date, due_date, return_date, status)
+            VALUES (?, ?, ?, ?, ?, ?, ?)
+        """;
+        try (
+                Connection connection = DatabaseManager.getConnection();
+                PreparedStatement ps = connection.prepareStatement(sql)
+                ) {
+            ps.setLong(1, loan.getStudent().getId());
+            ps.setLong(2, loan.getBook().getId());
+            ps.setLong(3, loan.getRegisteredBy().getId());
+            ps.setString(4, loan.getLoanDate().toString());
+            ps.setString(5, loan.getDueDate().toString());
+            ps.setString(6, loan.getReturnDate() != null ? loan.getReturnDate().toString() : null);
+            ps.setString(7, loan.getStatus().toString());
+            ps.executeUpdate();
+        }
+    }
+
+    public void markAsReturned(long loanId, LocalDate returnDate) throws SQLException {
+        String sql = """
+            UPDATE loans
+            SET return_date = ?, status = 'RETURNED'
+            WHERE id = ?
+        """;
+        try (
+                Connection connection = DatabaseManager.getConnection();
+                PreparedStatement ps = connection.prepareStatement(sql)
+                ) {
+            ps.setString(1, returnDate.toString());
+            ps.setLong(2, loanId);
+            ps.executeUpdate();
+        }
+    }
+
+    public int countReturnedToday() throws SQLException {
+        String sql = """
+            SELECT COUNT(*) FROM loans
+            WHERE status = 'RETURNED'
+              AND return_date = date('now')
+        """;
+        try (
+                Connection connection = DatabaseManager.getConnection();
+                PreparedStatement ps = connection.prepareStatement(sql);
+                ResultSet rs = ps.executeQuery()
+                ) {
+            return rs.next() ? rs.getInt(1) : 0;
+        }
+    }
+
+    public List<Loan> findMostOverdue() throws SQLException {
+        String sql = """
+            SELECT l.id, l.loan_date, l.due_date, l.return_date, l.status,
+                   s.id AS student_id, s.first_name, s.last_name,
+                   b.id AS book_id, b.title
+            FROM loans l
+            JOIN students s ON l.student_id = s.id
+            JOIN books b ON l.book_id = b.id
+            WHERE l.status = 'OVERDUE'
+            ORDER BY l.due_date ASC
+            LIMIT 5
+        """;
+        List<Loan> loans = new ArrayList<>();
+        try (
+                Connection connection = DatabaseManager.getConnection();
+                PreparedStatement ps = connection.prepareStatement(sql);
+                ResultSet rs = ps.executeQuery()) {
+            while (rs.next()) loans.add(mapResultSetToLoan(rs));
+        }
+        return loans;
+    }
+
     public int countOngoingLoans() {
         String sql = "SELECT COUNT(*) FROM loans WHERE status = 'ONGOING' OR status = 'OVERDUE'";
         try (
