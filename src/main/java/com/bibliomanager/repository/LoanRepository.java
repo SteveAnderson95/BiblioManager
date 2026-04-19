@@ -11,6 +11,175 @@ import java.util.*;
 
 public class LoanRepository {
 
+    public List<Loan> findReturnedLoans(String period, String type) throws SQLException {
+        StringBuilder sql = new StringBuilder("""
+            SELECT l.id, l.loan_date, l.due_date, l.return_date, l.status,
+                   s.id AS student_id, s.first_name, s.last_name,
+                   b.id AS book_id, b.title
+            FROM loans l
+            JOIN students s ON l.student_id = s.id
+            JOIN books b ON l.book_id = b.id
+            WHERE l.status = 'RETURNED'
+        """);
+        List<Object> params = new ArrayList<>();
+
+        if (period != null) {
+            switch (period) {
+                case "Today" -> sql.append(" AND return_date = date('now')");
+                case "This week" -> sql.append(" AND return_date >= date('now', 'weekday 0', '-7 days')");
+                case "This month" -> sql.append(" AND strftime('%Y-%m', return_date) = strftime('%Y-%m', 'now')");
+            }
+        }
+        if (type != null) {
+            switch (type) {
+                case "On time" -> sql.append(" AND return_date <= due_date");
+                case "Late" -> sql.append(" AND return_date > due_date");
+            }
+        }
+        sql.append(" ORDER BY l.return_date DESC");
+
+        List<Loan> loans = new ArrayList<>();
+        try (
+                Connection connection = DatabaseManager.getConnection();
+                PreparedStatement ps = connection.prepareStatement(sql.toString());
+                ResultSet rs = ps.executeQuery()
+                ) {
+            while (rs.next()) loans.add(mapResultSetToLoan(rs));
+        }
+        return loans;
+    }
+
+    public List<Loan> searchReturnedLoans(String query, String period, String type) throws SQLException {
+        StringBuilder sql = new StringBuilder("""
+            SELECT l.id, l.loan_date, l.due_date, l.return_date, l.status,
+                   s.id AS student_id, s.first_name, s.last_name,
+                   b.id AS book_id, b.title
+            FROM loans l
+            JOIN students s ON l.student_id = s.id
+            JOIN books b ON l.book_id = b.id
+            WHERE l.status = 'RETURNED'
+        """);
+        List<Object> params = new ArrayList<>();
+
+        if (query != null && !query.isBlank()) {
+            sql.append("""
+                 AND (LOWER(s.first_name) LIKE ?
+                   OR LOWER(s.last_name) LIKE ?
+                   OR LOWER(b.title) LIKE ?)
+            """);
+            String q = "%" + query.toLowerCase() + "%";
+            params.add(q); params.add(q); params.add(q);
+        }
+        if (period != null) {
+            switch (period) {
+                case "Today" -> sql.append(" AND return_date = date('now')");
+                case "This week" -> sql.append(" AND return_date >= date('now', 'weekday 0', '-7 days')");
+                case "This month" -> sql.append(" AND strftime('%Y-%m', return_date) = strftime('%Y-%m', 'now')");
+            }
+        }
+        if (type != null) {
+            switch (type) {
+                case "On time" -> sql.append(" AND return_date <= due_date");
+                case "Late" -> sql.append(" AND return_date > due_date");
+            }
+        }
+        sql.append(" ORDER BY l.return_date DESC");
+
+        List<Loan> loans = new ArrayList<>();
+        try (
+                Connection connection = DatabaseManager.getConnection();
+                PreparedStatement ps = connection.prepareStatement(sql.toString())
+                ) {
+            for (int i = 0; i < params.size(); i++)
+                ps.setObject(i + 1, params.get(i));
+            try (ResultSet rs = ps.executeQuery()) {
+                while (rs.next()) loans.add(mapResultSetToLoan(rs));
+            }
+        }
+        return loans;
+    }
+
+    public int countReturnedOnTime() throws SQLException {
+        String sql = """
+            SELECT COUNT(*) FROM loans
+            WHERE status = 'RETURNED'
+              AND return_date <= due_date
+        """;
+        try (
+                Connection connection = DatabaseManager.getConnection();
+                PreparedStatement ps = connection.prepareStatement(sql);
+                ResultSet rs = ps.executeQuery()
+                ) {
+            return rs.next() ? rs.getInt(1) : 0;
+        }
+    }
+
+    public int countTotalReturned() throws SQLException {
+        String sql = "SELECT COUNT(*) FROM loans WHERE status = 'RETURNED'";
+        try (
+                Connection connection = DatabaseManager.getConnection();
+                PreparedStatement ps = connection.prepareStatement(sql);
+                ResultSet rs = ps.executeQuery()
+                ) {
+            return rs.next() ? rs.getInt(1) : 0;
+        }
+    }
+
+    // Borrows due today (ONGOING with due_date = today)
+    public int countExpectedReturnsToday() throws SQLException {
+        String sql = """
+            SELECT COUNT(*) FROM loans
+            WHERE status IN ('ONGOING', 'OVERDUE')
+              AND due_date <= date('now')
+        """;
+        try (
+                Connection connection = DatabaseManager.getConnection();
+                PreparedStatement ps = connection.prepareStatement(sql);
+                ResultSet rs = ps.executeQuery()
+                ) {
+            return rs.next() ? rs.getInt(1) : 0;
+        }
+    }
+
+    // Average number of days of delay on late returns
+    public double averageOverdueDays() throws SQLException {
+        String sql = """
+            SELECT AVG(julianday(return_date) - julianday(due_date))
+            FROM loans
+            WHERE status = 'RETURNED'
+              AND return_date > due_date
+        """;
+        try (
+                Connection connection = DatabaseManager.getConnection();
+                PreparedStatement ps = connection.prepareStatement(sql);
+                ResultSet rs = ps.executeQuery()
+                ) {
+            return rs.next() ? rs.getDouble(1) : 0.0;
+        }
+    }
+
+    // Returns per day this week
+    public Map<String, Integer> getReturnsPerDayThisWeek() throws SQLException {
+        Map<String, Integer> stats = new LinkedHashMap<>();
+        String sql = """
+            SELECT date(return_date) as day, COUNT(*) as count
+            FROM loans
+            WHERE status = 'RETURNED'
+              AND return_date >= date('now', '-6 days')
+            GROUP BY day
+            ORDER BY day ASC
+        """;
+        try (
+                Connection connection = DatabaseManager.getConnection();
+                PreparedStatement ps = connection.prepareStatement(sql);
+                ResultSet rs = ps.executeQuery()
+                ) {
+            while (rs.next())
+                stats.put(rs.getString("day"), rs.getInt("count"));
+        }
+        return stats;
+    }
+
     public List<Loan> findActiveLoans() throws SQLException {
         String sql = """
             SELECT l.id, l.loan_date, l.due_date, l.return_date, l.status,
