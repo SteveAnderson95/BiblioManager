@@ -11,12 +11,64 @@ import java.util.Map;
 
 public class LoanService {
 
-    private final LoanRepository repo = new LoanRepository();
+    private final LoanRepository loanRepo = new LoanRepository();
     private final BookRepository bookRepo = new BookRepository();
+
+
+    public List<Loan> getReturnedLoans(String period, String type) {
+        try {
+            return loanRepo.findReturnedLoans(period, type);
+        } catch (SQLException e) {
+            throw new RuntimeException("Error fetching returned loans", e);
+        }
+    }
+
+    public List<Loan> searchReturnedLoans(String query, String period, String type) {
+        try {
+            return loanRepo.searchReturnedLoans(query, period, type);
+        } catch (SQLException e) {
+            throw new RuntimeException("Error searching returned loans", e);
+        }
+    }
+
+    public double getPunctualityRate() {
+        try {
+            int total = loanRepo.countTotalReturned();
+            int onTime = loanRepo.countReturnedOnTime();
+            if (total == 0) return 0.0;
+            return (onTime * 100.0) / total;
+        } catch (SQLException e) {
+            throw new RuntimeException("Error computing punctuality rate", e);
+        }
+    }
+
+    public int getExpectedReturnsToday() {
+        try {
+            return loanRepo.countExpectedReturnsToday();
+        } catch (SQLException e) {
+            throw new RuntimeException("Error counting expected returns", e);
+        }
+    }
+
+    public double getAverageOverdueDays() {
+        try {
+            return loanRepo.averageOverdueDays();
+        } catch (SQLException e) {
+            throw new RuntimeException("Error computing average overdue", e);
+        }
+    }
+
+    public Map<String, Integer> getReturnsThisWeek() {
+        try {
+            return loanRepo.getReturnsPerDayThisWeek();
+        } catch (SQLException e) {
+            throw new RuntimeException("Error fetching weekly returns", e);
+        }
+    }
 
     public List<Loan> getActiveLoans() {
         try {
-            return repo.findActiveLoans();
+            return loanRepo.findActiveLoans();
         } catch (SQLException e) {
             throw new RuntimeException("Error fetching active loans", e);
         }
@@ -24,7 +76,7 @@ public class LoanService {
 
     public List<Loan> searchActiveLoans(String query, String status) {
         try {
-            return repo.searchActiveLoans(query, status);
+            return loanRepo.searchActiveLoans(query, status);
         } catch (SQLException e) {
             throw new RuntimeException("Error searching loans", e);
         }
@@ -33,7 +85,7 @@ public class LoanService {
     public void registerLoan(Loan loan) {
         validateLoan(loan);
         try {
-            repo.insert(loan);
+            loanRepo.insert(loan);
             // We decrement th book availability
             bookRepo.decrementAvailability(loan.getBook().getId());
         } catch (SQLException e) {
@@ -45,7 +97,7 @@ public class LoanService {
 
     public void markAsReturned(long loanId, long bookId) {
         try {
-            repo.markAsReturned(loanId, LocalDate.now());
+            loanRepo.markAsReturned(loanId, LocalDate.now());
             // We increment again th book availability
             bookRepo.incrementAvailability(bookId);
         } catch (SQLException e) {
@@ -55,7 +107,7 @@ public class LoanService {
 
     public int getReturnedTodayCount() {
         try {
-            return repo.countReturnedToday();
+            return loanRepo.countReturnedToday();
         } catch (SQLException e) {
             throw new RuntimeException("Error counting returns", e);
         }
@@ -63,7 +115,7 @@ public class LoanService {
 
     public List<Loan> getMostOverdue() {
         try {
-            return repo.findMostOverdue();
+            return loanRepo.findMostOverdue();
         } catch (SQLException e) {
             throw new RuntimeException("Error fetching most overdue", e);
         }
@@ -83,28 +135,28 @@ public class LoanService {
     }
 
     public int getActiveLoansCount() {
-        return repo.countOngoingLoans();
+        return loanRepo.countOngoingLoans();
     }
 
     public int getOverdueLoansCount() {
-        return repo.countOverdueLoans();
+        return loanRepo.countOverdueLoans();
     }
 
     public Map<String, Integer> getWeeklyTrend() {
-        return repo.getLoansPerDayLastWeek();
+        return loanRepo.getLoansPerDayLastWeek();
     }
 
     public List<Loan> getRecentBorrowings() {
-        return repo.findRecentLoans(10);
+        return loanRepo.findRecentLoans(10);
     }
 
     public List<Loan> getOverdueAlerts() {
-        return repo.findOverdueLoans();
+        return loanRepo.findOverdueLoans();
     }
 
     public List<Loan> getActiveLoansByStudent(long studentId) {
         try {
-            return repo.findActiveLoansByStudent(studentId);
+            return loanRepo.findActiveLoansByStudent(studentId);
         } catch (SQLException e) {
             throw new RuntimeException("Error fetching student loans", e);
         }
