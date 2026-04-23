@@ -15,6 +15,22 @@ public class LoanService {
     private final BookRepository bookRepo = new BookRepository();
 
 
+    public List<Loan> getAllLoans(String status, String period) {
+        try {
+            return loanRepo.findAllLoans(status, period);
+        } catch (SQLException e) {
+            throw new RuntimeException("Error fetching all loans", e);
+        }
+    }
+
+    public List<Loan> searchAllLoans(String query, String status, String period) {
+        try {
+            return loanRepo.searchAllLoans(query, status, period);
+        } catch (SQLException e) {
+            throw new RuntimeException("Error searching loans", e);
+        }
+    }
+
     public List<Loan> getReturnedLoans(String period, String type) {
         try {
             return loanRepo.findReturnedLoans(period, type);
