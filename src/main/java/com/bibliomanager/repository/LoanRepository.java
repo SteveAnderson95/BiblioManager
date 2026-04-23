@@ -1,6 +1,7 @@
 package com.bibliomanager.repository;
 
 import com.bibliomanager.model.Book;
+import com.bibliomanager.model.Librarian;
 import com.bibliomanager.model.Loan;
 import com.bibliomanager.model.Student;
 import com.bibliomanager.utils.DatabaseManager;
@@ -10,6 +11,125 @@ import java.time.LocalDate;
 import java.util.*;
 
 public class LoanRepository {
+
+    public List<Loan> findAllLoans(String status, String period) throws SQLException {
+        StringBuilder sql = new StringBuilder("""
+            SELECT l.id, l.loan_date, l.due_date, l.return_date, l.status,
+                   s.id AS student_id, s.first_name, s.last_name,
+                   b.id AS book_id, b.title,
+                   lib.username AS librarian_username
+            FROM loans l
+            JOIN students s ON l.student_id = s.id
+            JOIN books b ON l.book_id = b.id
+            JOIN librarians lib ON l.registered_by = lib.id
+            WHERE 1=1
+        """);
+        List<Object> params = new ArrayList<>();
+
+        if (status != null && !status.equals("All status")) {
+            sql.append(" AND l.status = ?");
+            params.add(status.toUpperCase());
+        }
+        if (period != null) {
+            switch (period) {
+                case "Today" -> sql.append(" AND l.loan_date = date('now')");
+                case "This week" -> sql.append(" AND l.loan_date >= date('now', '-7 days')");
+                case "This month" -> sql.append(" AND strftime('%Y-%m', l.loan_date) = strftime('%Y-%m', 'now')");
+            }
+        }
+        sql.append(" ORDER BY l.loan_date DESC");
+
+        List<Loan> loans = new ArrayList<>();
+        try (
+                Connection connection = DatabaseManager.getConnection();
+                PreparedStatement ps = connection.prepareStatement(sql.toString())
+                ) {
+            for (int i = 0; i < params.size(); i++)
+                ps.setObject(i + 1, params.get(i));
+            try (ResultSet rs = ps.executeQuery()) {
+                while (rs.next()) loans.add(mapRowWithLibrarian(rs));
+            }
+        }
+        return loans;
+    }
+
+    public List<Loan> searchAllLoans(String query, String status, String period)
+            throws SQLException {
+        StringBuilder sql = new StringBuilder("""
+            SELECT l.id, l.loan_date, l.due_date, l.return_date, l.status,
+                   s.id AS student_id, s.first_name, s.last_name,
+                   b.id AS book_id, b.title,
+                   lib.username AS librarian_username
+            FROM loans l
+            JOIN students s ON l.student_id = s.id
+            JOIN books b ON l.book_id = b.id
+            JOIN librarians lib ON l.registered_by = lib.id
+            WHERE 1=1
+        """);
+        List<Object> params = new ArrayList<>();
+
+        if (query != null && !query.isBlank()) {
+            sql.append("""
+                 AND (LOWER(s.first_name) LIKE ?
+                 OR LOWER(s.last_name) LIKE ?
+                 OR LOWER(b.title) LIKE ?)
+            """);
+            String q = "%" + query.toLowerCase() + "%";
+            params.add(q); params.add(q); params.add(q);
+        }
+        if (status != null && !status.equals("All status")) {
+            sql.append(" AND l.status = ?");
+            params.add(status.toUpperCase());
+        }
+        if (period != null) {
+            switch (period) {
+                case "Today" -> sql.append(" AND l.loan_date = date('now')");
+                case "This week" -> sql.append(" AND l.loan_date >= date('now', '-7 days')");
+                case "This month" -> sql.append(" AND strftime('%Y-%m', l.loan_date) = strftime('%Y-%m', 'now')");
+            }
+        }
+        sql.append(" ORDER BY l.loan_date DESC");
+
+        List<Loan> loans = new ArrayList<>();
+        try (
+                Connection connection = DatabaseManager.getConnection();
+                PreparedStatement ps = connection.prepareStatement(sql.toString())
+                ) {
+            for (int i = 0; i < params.size(); i++)
+                ps.setObject(i + 1, params.get(i));
+            try (ResultSet rs = ps.executeQuery()) {
+                while (rs.next()) loans.add(mapRowWithLibrarian(rs));
+            }
+        }
+        return loans;
+    }
+
+    // mapRow with librarian_username
+    private Loan mapRowWithLibrarian(ResultSet rs) throws SQLException {
+        Student student = new Student(
+                rs.getLong("student_id"), null,
+                rs.getString("last_name"),
+                rs.getString("first_name"),
+                "", ""
+        );
+        Book book = new Book(
+                rs.getLong("book_id"),
+                rs.getString("title"),
+                "", "", null, "", 0, 0
+        );
+        Librarian librarian = new Librarian(
+                0, "", "",
+                rs.getString("librarian_username"),
+                "", ""
+        );
+        return new Loan(
+                rs.getLong("id"),
+                student, book, librarian,
+                LocalDate.parse(rs.getString("loan_date")),
+                LocalDate.parse(rs.getString("due_date")),
+                rs.getString("return_date") != null ? LocalDate.parse(rs.getString("return_date")) : null
+        );
+    }
 
     public List<Loan> findReturnedLoans(String period, String type) throws SQLException {
         StringBuilder sql = new StringBuilder("""
