@@ -48,6 +48,17 @@
     -fx-cursor: hand;
     -fx-padding: 8 16;
 }
+.pdf-btn {
+    -fx-background-color: #2E3D60;
+    -fx-background-radius: 8;
+    -fx-text-fill: white;
+    -fx-font-size: 13px;
+    -fx-font-weight: bold;
+    -fx-cursor: hand;
+    -fx-padding: 8 16;
+}
+.pdf-btn:hover { -fx-background-color: #344775; }
+.pdf-btn:pressed { -fx-background-color: #1c2a4a; }
 .add-btn:hover   { -fx-background-color: #d94e1f; }
 .add-btn:pressed { -fx-background-color: #c04418; }
 .total-badge {

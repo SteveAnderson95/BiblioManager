@@ -43,7 +43,7 @@
     -fx-border-radius: 7;
     -fx-background-radius: 7;
     -fx-text-fill: #1E1F20;
-    -fx-padding: 7 10;
+    -fx-padding: 0 10;
 }
 .form-field:focused {
     -fx-border-color: #2E3D60;
