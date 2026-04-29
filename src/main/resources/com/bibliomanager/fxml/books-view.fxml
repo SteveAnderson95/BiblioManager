@@ -129,7 +129,7 @@
                   </HBox>
                   <StackPane minHeight="200.0" prefHeight="200.0" prefWidth="190.0" styleClass="poster-container" VBox.vgrow="ALWAYS">
                      <children>
-                        <ImageView fx:id="posterImageView" fitHeight="200.0" fitWidth="190.0" pickOnBounds="true" preserveRatio="true" styleClass="poster-image" />
+                        <ImageView fx:id="posterImageView" fitHeight="200.0" fitWidth="240.0" pickOnBounds="true" preserveRatio="true" styleClass="poster-image" />
                         <Label fx:id="posterPlaceholderLabel" styleClass="info-label" text="No cover available" />
                      </children>
                   </StackPane>

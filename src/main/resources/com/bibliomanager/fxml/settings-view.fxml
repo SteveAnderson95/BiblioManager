@@ -1,16 +1,355 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.scene.control.*?>
-<?import javafx.scene.layout.*?>
-<?import javafx.scene.text.*?>
+<?import java.net.URL?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.PasswordField?>
+<?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Region?>
+<?import javafx.scene.layout.StackPane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.shape.Circle?>
+<?import javafx.scene.text.Font?>
 
+<BorderPane prefHeight="700.0" prefWidth="1000.0" styleClass="settings-root" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.bibliomanager.controller.SettingsController">
 
-<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/17.0.12" xmlns:fx="http://javafx.com/fxml/1">
-   <children>
-      <Label layoutX="171.0" layoutY="145.0" text="Settings">
-         <font>
-            <Font size="60.0" />
-         </font>
-      </Label>
-   </children>
-</AnchorPane>
+   <top>
+      <HBox prefHeight="55.0" styleClass="header-container" BorderPane.alignment="CENTER">
+         <children>
+            <HBox alignment="CENTER_LEFT" prefHeight="55.0" spacing="10.0" HBox.hgrow="ALWAYS">
+               <children>
+                  <ImageView fitHeight="26.0" fitWidth="26.0" pickOnBounds="true" preserveRatio="true">
+                     <image><Image url="@../icons/settingsBlack.png" /></image>
+                  </ImageView>
+                  <Label styleClass="header-title" text="Settings">
+                     <font>
+                        <Font name="System Bold" size="20.0" />
+                     </font></Label>
+               </children>
+               <HBox.margin><Insets left="20.0" /></HBox.margin>
+            </HBox>
+         </children>
+      </HBox>
+   </top>
+
+   <center>
+      <HBox BorderPane.alignment="CENTER">
+         <children>
+
+            <!-- ── NAV GAUCHE ── -->
+            <VBox prefWidth="210.0" spacing="4.0" styleClass="settings-nav">
+               <padding><Insets bottom="16.0" left="12.0" right="12.0" top="16.0" /></padding>
+               <children>
+
+                  <Button fx:id="btnProfile" maxWidth="Infinity" mnemonicParsing="false" onAction="#showProfile" prefHeight="45.0" prefWidth="196.0" styleClass="nav-btn, nav-btn-active" text="My profile">
+                     <graphic>
+                        <ImageView fitHeight="16.0" fitWidth="16.0" pickOnBounds="true" preserveRatio="true">
+                           <image><Image url="@../icons/profile.png" /></image>
+                        </ImageView>
+                     </graphic>
+                  </Button>
+
+                  <Button fx:id="btnCategories" maxWidth="Infinity" mnemonicParsing="false" onAction="#showCategories" prefHeight="45.0" prefWidth="196.0" styleClass="nav-btn" text="Categories">
+                     <graphic>
+                        <ImageView fitHeight="16.0" fitWidth="16.0" pickOnBounds="true" preserveRatio="true">
+                           <image><Image url="@../icons/menu.png" /></image>
+                        </ImageView>
+                     </graphic>
+                  </Button>
+
+                  <Button fx:id="btnLibrary" maxWidth="Infinity" mnemonicParsing="false" onAction="#showLibrary" prefHeight="45.0" prefWidth="196.0" styleClass="nav-btn" text="Library info">
+                     <graphic>
+                        <ImageView fitHeight="16.0" fitWidth="16.0" pickOnBounds="true" preserveRatio="true">
+                           <image><Image url="@../icons/open-book (1).png" /></image>
+                        </ImageView>
+                     </graphic>
+                  </Button>
+
+                  <Button fx:id="btnDefaults" maxWidth="Infinity" mnemonicParsing="false" onAction="#showDefaults" prefHeight="45.0" prefWidth="196.0" styleClass="nav-btn" text="Loan defaults">
+                     <graphic>
+                        <ImageView fitHeight="16.0" fitWidth="16.0" pickOnBounds="true" preserveRatio="true">
+                           <image><Image url="@../icons/arrows.png" /></image>
+                        </ImageView>
+                     </graphic>
+                  </Button>
+
+                  <Region VBox.vgrow="ALWAYS" />
+
+                  <Button fx:id="btnDanger" maxWidth="Infinity" mnemonicParsing="false" onAction="#showDanger" styleClass="nav-btn, nav-btn-danger" text="Danger zone">
+                     <graphic>
+                        <ImageView fitHeight="16.0" fitWidth="16.0" pickOnBounds="true" preserveRatio="true">
+                           <image><Image url="@../icons/warning (1).png" /></image>
+                        </ImageView>
+                     </graphic>
+                  </Button>
+               </children>
+               <HBox.margin>
+                  <Insets bottom="20.0" left="20.0" top="20.0" />
+               </HBox.margin>
+            </VBox>
+
+            <!-- ── CONTENU ── -->
+            <ScrollPane fitToWidth="true" styleClass="settings-scroll" HBox.hgrow="ALWAYS">
+               <content>
+                  <StackPane>
+                     <children>
+
+                        <!-- PROFILE SECTION -->
+                        <VBox fx:id="profileSection" managed="true" spacing="14.0" styleClass="settings-content" visible="false">
+                           <padding><Insets bottom="20.0" left="20.0" right="20.0" top="20.0" /></padding>
+                           <children>
+                              <VBox spacing="0.0" styleClass="settings-card">
+                                 <children>
+                                    <Label styleClass="card-title" text="Profile Settings" />
+
+                                    <!-- Avatar + nom + stats -->
+                                    <HBox alignment="CENTER_LEFT" spacing="14.0" styleClass="avatar-block">
+                                       <children>
+                                          <StackPane>
+                                             <children>
+                                                <Circle fx:id="avatarCircle" fill="#2E3D60" radius="26.0" />
+                                                <Label fx:id="avatarLabel" styleClass="avatar-initials" text="EC" />
+                                             </children>
+                                          </StackPane>
+                                          <VBox spacing="2.0">
+                                             <children>
+                                                <Label fx:id="profileName" styleClass="profile-name" text="Emmy Chella" />
+                                                <Label fx:id="profileUsername" styleClass="profile-sub" text="Chella01 - Librarian" />
+                                             </children>
+                                          </VBox>
+                                       </children>
+                                    </HBox>
+
+                                    <!-- Stats mini -->
+                                    <HBox spacing="8.0" styleClass="stats-row">
+                                       <children>
+                                          <VBox styleClass="stat-mini" HBox.hgrow="ALWAYS">
+                                             <children>
+                                                <Label fx:id="statLoans" styleClass="stat-val" text="0" />
+                                                <Label styleClass="stat-lbl" text="Loans registered" />
+                                             </children>
+                                          </VBox>
+                                          <VBox styleClass="stat-mini" HBox.hgrow="ALWAYS">
+                                             <children>
+                                                <Label fx:id="statToday" styleClass="stat-val" text="0" />
+                                                <Label styleClass="stat-lbl" text="Returns today" />
+                                             </children>
+                                          </VBox>
+                                          <VBox styleClass="stat-mini" HBox.hgrow="ALWAYS">
+                                             <children>
+                                                <Label fx:id="statReturns" styleClass="stat-val" text="0" />
+                                                <Label styleClass="stat-lbl" text="Overdue loans" textFill="RED" />
+                                             </children>
+                                          </VBox>
+                                       </children>
+                                    </HBox>
+
+                                    <!-- Formulaire -->
+                                    <HBox spacing="12.0" styleClass="form-row">
+                                       <children>
+                                          <VBox styleClass="form-group" HBox.hgrow="ALWAYS">
+                                             <children>
+                                                <Label styleClass="form-label" text="FIRST NAME" />
+                                                <TextField fx:id="firstNameField" promptText="First name" styleClass="form-field" />
+                                             </children>
+                                          </VBox>
+                                          <VBox styleClass="form-group" HBox.hgrow="ALWAYS">
+                                             <children>
+                                                <Label styleClass="form-label" text="LAST NAME" />
+                                                <TextField fx:id="lastNameField" promptText="Last name" styleClass="form-field" />
+                                             </children>
+                                          </VBox>
+                                       </children>
+                                    </HBox>
+
+                                    <HBox spacing="12.0" styleClass="form-row">
+                                       <children>
+                                          <VBox styleClass="form-group" HBox.hgrow="ALWAYS">
+                                             <children>
+                                                <Label styleClass="form-label" text="USERNAME" />
+                                                <TextField fx:id="usernameField" promptText="Username" styleClass="form-field" />
+                                             </children>
+                                          </VBox>
+                                          <VBox styleClass="form-group" HBox.hgrow="ALWAYS">
+                                             <children>
+                                                <Label styleClass="form-label" text="EMAIL" />
+                                                <TextField fx:id="emailField" promptText="Email" styleClass="form-field" />
+                                             </children>
+                                          </VBox>
+                                       </children>
+                                    </HBox>
+
+                                    <HBox spacing="12.0" styleClass="form-row">
+                                       <children>
+                                          <VBox styleClass="form-group" HBox.hgrow="ALWAYS">
+                                             <children>
+                                                <Label styleClass="form-label" text="NEW PASSWORD" />
+                                                <PasswordField fx:id="newPasswordField" promptText="Leave empty to keep current" styleClass="form-field" />
+                                             </children>
+                                          </VBox>
+                                          <VBox styleClass="form-group" HBox.hgrow="ALWAYS">
+                                             <children>
+                                                <Label styleClass="form-label" text="CONFIRM PASSWORD" />
+                                                <PasswordField fx:id="confirmPasswordField" promptText="Confirm new password" styleClass="form-field" />
+                                             </children>
+                                          </VBox>
+                                       </children>
+                                    </HBox>
+
+                                    <!-- Error label -->
+                                    <Label fx:id="profileErrorLabel" maxWidth="Infinity" prefHeight="4.0" prefWidth="688.0" styleClass="error-label" text="" wrapText="true" />
+
+                                    <!-- Boutons -->
+                                    <HBox alignment="CENTER_RIGHT" spacing="10.0" styleClass="card-footer">
+                                       <children>
+                                          <Button mnemonicParsing="false" onAction="#cancelProfile" styleClass="btn-cancel" text="Cancel" />
+                                          <Button mnemonicParsing="false" onAction="#saveProfile" styleClass="add-btn" text="Save changes">
+                                             <font>
+                                                <Font size="16.0" />
+                                             </font></Button>
+                                       </children>
+                                    </HBox>
+                                 </children>
+                              </VBox>
+                           </children>
+                        </VBox>
+
+                        <!-- CATEGORIES SECTION -->
+                        <VBox fx:id="categoriesSection" managed="false" spacing="14.0" styleClass="settings-content">
+                           <padding><Insets bottom="20.0" left="20.0" right="20.0" top="20.0" /></padding>
+                           <children>
+                              <VBox spacing="0.0" styleClass="settings-card">
+                                 <children>
+                                    <Label styleClass="card-title" text="Categories Settings" />
+                                    <VBox fx:id="categoriesContainer" spacing="6.0" />
+                                    <HBox spacing="8.0" styleClass="add-cat-row">
+                                       <children>
+                                          <TextField fx:id="newCatNameField" promptText="New category name..." styleClass="form-field" HBox.hgrow="ALWAYS" />
+                                          <TextField fx:id="newCatDescField" promptText="Description (optional)" styleClass="form-field" HBox.hgrow="ALWAYS" />
+                                          <Button mnemonicParsing="false" onAction="#handleAddCategory" prefHeight="34.0" prefWidth="62.0" styleClass="add-btn" text="Add" />
+                                       </children>
+                                    </HBox>
+                                 </children>
+                              </VBox>
+                           </children>
+                        </VBox>
+
+                        <!-- LIBRARY INFO SECTION -->
+                        <VBox fx:id="librarySection" managed="false" spacing="14.0" styleClass="settings-content" visible="false">
+                           <padding><Insets bottom="20.0" left="20.0" right="20.0" top="20.0" /></padding>
+                           <children>
+                              <VBox spacing="0.0" styleClass="settings-card">
+                                 <children>
+                                    <Label styleClass="card-title" text="Library info" />
+                                    <VBox spacing="4.0" styleClass="form-group">
+                                       <children>
+                                          <Label styleClass="form-label" text="LIBRARY NAME" />
+                                          <TextField fx:id="libraryNameField" promptText="Library name" styleClass="form-field" />
+                                       </children>
+                                    </VBox>
+                                    <VBox spacing="4.0" styleClass="form-group">
+                                       <VBox.margin><Insets top="10.0" /></VBox.margin>
+                                       <children>
+                                          <Label styleClass="form-label" text="ADDRESS" />
+                                          <TextField fx:id="libraryAddressField" promptText="Address" styleClass="form-field" />
+                                       </children>
+                                    </VBox>
+                                    <HBox alignment="CENTER_RIGHT" styleClass="card-footer">
+                                       <children>
+                                          <Button mnemonicParsing="false" onAction="#saveLibraryInfo" styleClass="add-btn" text="Save" />
+                                       </children>
+                                    </HBox>
+                                 </children>
+                              </VBox>
+                           </children>
+                        </VBox>
+
+                        <!-- DEFAULTS SECTION -->
+                        <VBox fx:id="defaultsSection" managed="false" spacing="14.0" styleClass="settings-content" visible="false">
+                           <padding><Insets bottom="20.0" left="20.0" right="20.0" top="20.0" /></padding>
+                           <children>
+                              <VBox spacing="0.0" styleClass="settings-card">
+                                 <children>
+                                    <Label styleClass="card-title" text="Loan defaults" />
+                                    <HBox spacing="12.0" styleClass="form-row">
+                                       <children>
+                                          <VBox styleClass="form-group" HBox.hgrow="ALWAYS">
+                                             <children>
+                                                <Label styleClass="form-label" text="DEFAULT LOAN DURATION (DAYS)" />
+                                                <TextField fx:id="defaultDurationField" promptText="14" styleClass="form-field" />
+                                             </children>
+                                          </VBox>
+                                          <VBox styleClass="form-group" HBox.hgrow="ALWAYS">
+                                             <children>
+                                                <Label styleClass="form-label" text="MAX LOANS PER STUDENT" />
+                                                <TextField fx:id="maxLoansField" promptText="3" styleClass="form-field" />
+                                             </children>
+                                          </VBox>
+                                       </children>
+                                    </HBox>
+                                    <HBox alignment="CENTER_RIGHT" styleClass="card-footer">
+                                       <children>
+                                          <Button mnemonicParsing="false" onAction="#saveDefaults" styleClass="add-btn" text="Save" />
+                                       </children>
+                                    </HBox>
+                                 </children>
+                              </VBox>
+                           </children>
+                        </VBox>
+
+                        <!-- DANGER SECTION -->
+                        <VBox fx:id="dangerSection" managed="false" spacing="14.0" styleClass="settings-content" visible="false">
+                           <padding><Insets bottom="20.0" left="20.0" right="20.0" top="20.0" /></padding>
+                           <children>
+                              <VBox spacing="0.0" styleClass="settings-card, danger-card">
+                                 <children>
+                                    <Label styleClass="card-title, danger-title" text="Danger zone" />
+
+                                    <HBox alignment="CENTER_LEFT" spacing="16.0" styleClass="danger-row">
+                                       <children>
+                                          <VBox spacing="3.0" HBox.hgrow="ALWAYS">
+                                             <children>
+                                                <Label styleClass="danger-label" text="Reset all loans history" />
+                                                <Label styleClass="danger-desc" text="Permanently deletes all loan records. Books and students are kept." wrapText="true" />
+                                             </children>
+                                          </VBox>
+                                          <Button mnemonicParsing="false" onAction="#handleResetLoans" styleClass="btn-danger" text="Reset loans" />
+                                       </children>
+                                    </HBox>
+
+                                    <HBox alignment="CENTER_LEFT" spacing="16.0" styleClass="danger-row">
+                                       <children>
+                                          <VBox spacing="3.0" HBox.hgrow="ALWAYS">
+                                             <children>
+                                                <Label styleClass="danger-label" text="Reset entire database" />
+                                                <Label styleClass="danger-desc" text="Wipes all data including books, students and loans. Cannot be undone." wrapText="true" />
+                                             </children>
+                                          </VBox>
+                                          <Button mnemonicParsing="false" onAction="#handleFullReset" styleClass="btn-danger" text="Full reset" />
+                                       </children>
+                                    </HBox>
+                                 </children>
+                              </VBox>
+                           </children>
+                        </VBox>
+
+                     </children>
+                  </StackPane>
+               </content>
+            </ScrollPane>
+         </children>
+      </HBox>
+   </center>
+
+   <stylesheets>
+      <URL value="@../css/books.css" />
+      <URL value="@../css/book-dialog.css" />
+      <URL value="@../css/settings.css" />
+   </stylesheets>
+</BorderPane>

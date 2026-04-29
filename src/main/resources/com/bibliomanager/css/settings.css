@@ -1,0 +1,207 @@
+.settings-root {
+    -fx-background-color: #F0F0ED;
+}
+.settings-nav {
+    -fx-background-color: #ffffff;
+    -fx-border-color: #e8e8e8;
+    -fx-border-width: 0 1 0 0;
+    -fx-border-radius: 10;
+    -fx-background-radius: 10;
+}
+.nav-section-label {
+    -fx-text-fill: #aaaaaa;
+    -fx-font-size: 11px;
+    -fx-font-weight: bold;
+    -fx-padding: 0 8 8 8;
+    -fx-letter-spacing: 0.4px;
+}
+.nav-btn {
+    -fx-background-color: transparent;
+    -fx-border-color: transparent;
+    -fx-background-radius: 8;
+    -fx-border-radius: 8;
+    -fx-text-fill: #555555;
+    -fx-font-size: 17px;
+    -fx-font-weight: bold;
+    -fx-alignment: CENTER_LEFT;
+    -fx-padding: 9 12;
+    -fx-cursor: hand;
+    -fx-graphic-text-gap: 8;
+}
+.nav-btn:hover {
+    -fx-background-color: #f5f5f3;
+    -fx-text-fill: #1E1F20;
+}
+.nav-btn-active {
+    -fx-background-color: #dde3f0;
+    -fx-text-fill: #2E3D60;
+    -fx-font-weight: bold;
+}
+.nav-btn-danger {
+    -fx-text-fill: #b71c1c;
+}
+.nav-btn-danger:hover {
+    -fx-background-color: #fdecea;
+    -fx-text-fill: #b71c1c;
+}
+.settings-scroll {
+    -fx-background-color: #F0F0ED;
+    -fx-background: #F0F0ED;
+    -fx-border-color: transparent;
+}
+.settings-scroll .viewport {
+    -fx-background-color: #F0F0ED;
+}
+.settings-content {
+    -fx-background-color: transparent;
+}
+.settings-card {
+    -fx-background-color: #ffffff;
+    -fx-border-color: #e0e0e0;
+    -fx-border-radius: 10;
+    -fx-background-radius: 10;
+    -fx-border-width: 0.5;
+    -fx-padding: 16 18;
+}
+.card-title {
+    -fx-font-size: 17px;
+    -fx-font-weight: bold;
+    -fx-text-fill: #1E1F20;
+    -fx-padding: 0 0 12 0;
+    -fx-border-color: #f0f0f0;
+    -fx-border-width: 0 0 0.5 0;
+}
+.card-footer {
+    -fx-padding: 12 0 0 0;
+    -fx-border-color: #949292;
+    -fx-border-width: 0.5 0 0 0;
+    -fx-spacing: 8;
+}
+.avatar-block {
+    -fx-padding: 12 0 14 0;
+    -fx-border-color: #949292;
+    -fx-border-width: 0.5 0 0 0;
+}
+.avatar-initials {
+    -fx-text-fill: white;
+    -fx-font-size: 17px;
+    -fx-font-weight: bold;
+    -fx-alignment: CENTER;
+}
+.profile-name {
+    -fx-font-size: 16px;
+    -fx-font-weight: bold;
+    -fx-text-fill: #1E1F20;
+}
+.profile-sub {
+    -fx-font-size: 14px;
+    -fx-text-fill: #949292;
+}
+.stats-row {
+    -fx-padding: 0 0 14 0;
+}
+.stat-mini {
+    -fx-background-color: #f5f5f3;
+    -fx-background-radius: 8;
+    -fx-padding: 10 8;
+    -fx-alignment: CENTER;
+    -fx-spacing: 2;
+}
+.stat-val {
+    -fx-font-size: 20px;
+    -fx-font-weight: bold;
+    -fx-text-fill: #2E3D60;
+    -fx-alignment: CENTER;
+}
+.stat-lbl {
+    -fx-font-size: 16px;
+    -fx-text-fill: #949292;
+    -fx-alignment: CENTER;
+}
+.form-row {
+    -fx-padding: 0 0 10 0;
+}
+.form-group {
+    -fx-spacing: 3;
+}
+.form-label {
+    -fx-text-fill: #000;
+    -fx-font-size: 14px;
+    -fx-font-weight: bold;
+}
+.form-field {
+    -fx-background-color: #fafaf8;
+    -fx-border-color: #e0e0e0;
+    -fx-border-radius: 7;
+    -fx-background-radius: 7;
+    -fx-font-size: 15px;
+    -fx-text-fill: #1E1F20;
+    -fx-prompt-text-fill: #cccccc;
+    -fx-padding: 7 10;
+    -fx-border-width: 0.5;
+}
+.form-field:focused {
+    -fx-border-color: #2E3D60;
+    -fx-background-color: #ffffff;
+}
+.error-label {
+    -fx-text-fill: #b71c1c;
+    -fx-font-size: 12px;
+    -fx-padding: 0 0 4 0;
+}
+.add-cat-row {
+    -fx-padding: 10 0 0 0;
+}
+.danger-card {
+    -fx-border-color: #f5b5b5;
+}
+
+.danger-title {
+    -fx-text-fill: #b71c1c;
+    -fx-border-color: #f5b5b5;
+}
+.danger-row {
+    -fx-padding: 12 0;
+    -fx-border-color: #f5f5f5;
+    -fx-border-width: 0 0 0.5 0;
+    -fx-alignment: CENTER_LEFT;
+}
+.danger-label {
+    -fx-font-size: 13px;
+    -fx-font-weight: bold;
+    -fx-text-fill: #1E1F20;
+}
+.danger-desc {
+    -fx-font-size: 11px;
+    -fx-text-fill: #aaaaaa;
+}
+.btn-danger {
+    -fx-background-color: #ffffff;
+    -fx-border-color: #b71c1c;
+    -fx-border-radius: 7;
+    -fx-background-radius: 7;
+    -fx-text-fill: #b71c1c;
+    -fx-font-size: 12px;
+    -fx-font-weight: bold;
+    -fx-cursor: hand;
+    -fx-padding: 7 14;
+    -fx-border-width: 0.5;
+}
+.btn-danger:hover {
+    -fx-background-color: #fdecea;
+}
+.btn-cancel {
+    -fx-background-color: #ffffff;
+    -fx-border-color: #949292;
+    -fx-border-radius: 7;
+    -fx-background-radius: 7;
+    -fx-text-fill: #555555;
+    -fx-font-size: 13px;
+    -fx-font-weight: bold;
+    -fx-cursor: hand;
+    -fx-padding: 7 18;
+    -fx-border-width: 0.5;
+}
+.btn-cancel:hover {
+    -fx-background-color: #f5f5f5;
+}
