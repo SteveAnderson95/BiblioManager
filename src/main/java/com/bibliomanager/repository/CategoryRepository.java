@@ -89,6 +89,19 @@ public class CategoryRepository {
         }
     }
 
+    public int countBooksByCategory(long categoryId) throws SQLException {
+        String sql = "SELECT COUNT(*) FROM books WHERE category_id = ?";
+        try (
+                Connection connection = DatabaseManager.getConnection();
+                PreparedStatement ps = connection.prepareStatement(sql)
+                ) {
+            ps.setLong(1, categoryId);
+            try (ResultSet rs = ps.executeQuery()) {
+                return rs.next() ? rs.getInt(1) : 0;
+            }
+        }
+    }
+
     private Category mapRow(ResultSet rs) throws SQLException {
         return new Category(
                 rs.getLong("id"),

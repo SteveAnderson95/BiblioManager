@@ -38,6 +38,14 @@ public class CategoryService {
         }
     }
 
+    public int getBookCountByCategory(long categoryId) {
+        try {
+            return categoryRepo.countBooksByCategory(categoryId);
+        } catch (SQLException e) {
+            throw new RuntimeException("Error counting books", e);
+        }
+    }
+
     public List<Category> getAllCategories() {
         return categoryRepo.findAll();
     }
