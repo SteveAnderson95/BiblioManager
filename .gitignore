@@ -15,6 +15,7 @@ replay_pid*
 *.trace.db
 .env
 .env.*
+covers/
 
 ### IntelliJ IDEA ###
 .idea/
@@ -51,5 +52,4 @@ build/
 ### Mac OS ###
 .DS_Store
 
-.codex
 
